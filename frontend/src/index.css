@@ -1,5 +1,33 @@
-body {
+/* body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+} */
+
+.list-books-title {
+  padding: 10px 0;
+  background: #2e7c31;
+  text-align: center;
+}
+
+.positon-header {
+  margin-top: 90px;
+  display: -webkit-inline-box;
+}
+
+.header-space {
+  margin-left: 1em;
+}
+
+.boxed {
+  border: 1px solid green ;
+  border-width: medium;
+  width: 80%;
+}
+
+.divinline {
+
+  margin-left: 50%;
+  margin-top: -5.5%;
+ 
 }

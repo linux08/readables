@@ -1,5 +1,6 @@
 import * as actionTypes from './actiontypes';
-import axios from 'axios'
+import Axios from 'axios'
+
 
 const apiUrl = 'http://localhost/5001';
 
@@ -11,26 +12,35 @@ export const fetchCategorySuccess = (category) => {
     }
 };
 
-export const fetchCategoryOfAPostSuccess = (category) => {
+export const fetchCategoryOfAPostSuccess = (data) => {
+    console.log('it got here fetchCategoryOfAPostSuccess  ')
     return {
         type: actionTypes.FETCH_CATEGORY_OF_A_POST_SUCCESS,
-        category
+        data
     }
 };
 
+//export const FETCH_CATEGORY_OF_A_POST_SUCCESS= 'FETCH_CATEGORY_OF_A_POST_SUCCESS'
+
+
 
 export const fetchCategoryOfAPost = () => {
+    console.log('trying to get category of a post')
+    const url = 'http://localhost:5001/posts'
+    console.log(url)
     return (dispatch) => {
-        return Axios.get(apiUrl`/${':category/posts'},`, {
-            headers: {
-                "name": "react"
-            }
-        })
-            .then(response => {
-                dispatch(fetchCategorySuccess(response.data))
+        return Axios.get(url,
+            {
+                headers: { 'Authorization': 'whatever-you-want' }
+            })
+            .then((response) => {
+                dispatch(fetchCategoryOfAPostSuccess(response.data))
+                console.log(response.data)
             })
             .catch(error => {
-                throw (error);
+                console.log('error her')
+                console.log(error)
+                //throw (error);
             });
     };
 };
@@ -38,7 +48,7 @@ export const fetchCategoryOfAPost = () => {
 
 export const fetchCategory = () => {
     return (dispatch) => {
-        return Axios.get(apiUrl`/${categories},`, {
+        return Axios.get(apiUrl`/${'categories'},`, {
             headers: {
                 "name": "react"
             }
@@ -47,7 +57,8 @@ export const fetchCategory = () => {
                 dispatch(fetchCategorySuccess(response.data))
             })
             .catch(error => {
-                throw (error);
+                console.log(error)
+                //throw (error);
             });
     };
 };

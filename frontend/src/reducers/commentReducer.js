@@ -1,4 +1,4 @@
- const commentReducer = (state = [], action) => {
+  export const commentReducer = (state = [], action) => {
     switch (action.type) {
      
       default:
@@ -6,4 +6,4 @@
     }
   };
   
-  export default commentReducer
+  // export default commentReducer
