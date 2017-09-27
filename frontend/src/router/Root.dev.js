@@ -10,10 +10,13 @@ const Root = ({ store }) => (
   <Provider store={store}>
     <div>
       <Route exact path="/" component={App} />
-      <Route path="/submitform"
+      <Route path="/:category"
         component={App} />
-      <Route path="/submitfor"
+      <Route path="/:category/:post_id"
         component={App} />
+      <Route path="/create/post"
+        component={App} />
+      {/* <Route exact path ='/edit' component={App} /> */}
 
     </div>
   </Provider>

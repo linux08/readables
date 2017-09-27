@@ -2,9 +2,6 @@ import * as actionTypes from './actiontypes';
 import Axios from 'axios'
 
 
-const apiUrl = 'http://localhost/5001';
-
-
 export const fetchCategorySuccess = (category) => {
     return {
         type: actionTypes.FETCH_CATEGORY_SUCCESS,
@@ -41,14 +38,11 @@ export const fetchCategoryOfAPost = () => {
 
 
 export const fetchCategory = () => {
-    console.log('clicked here')
     return async (dispatch) => {
         try {
             const response = await Axios.get('http://localhost:5001/categories', {
                 headers: { "Access-Control-Allow-Origin": "*", 'Authorization': 'whatever-you-want' }
             })
-            console.log('trying asyn await')
-            console.log(response)
             return dispatch(fetchCategorySuccess(response.data))
         }
         catch (err) {

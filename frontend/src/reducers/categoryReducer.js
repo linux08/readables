@@ -1,10 +1,4 @@
 
-const initialState = {
-  category:{},
-  posts: {}
-}
-
-
 export const categoryReducer = (state=[], action) => {
 
   console.log(action.type)
