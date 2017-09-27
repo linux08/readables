@@ -15,7 +15,7 @@ export default function configureStore(initialState) {
 
     // thunk middleware can also accept an extra argument to be passed to each thunk action
     // https://github.com/gaearon/redux-thunk#injecting-a-custom-argument
-    thunkMiddleware, logger ,promise
+    thunkMiddleware, logger //,promise
   ];
 
   const store = createStore(rootReducer, initialState, compose(
@@ -34,28 +34,3 @@ export default function configureStore(initialState) {
 
   return store;
 }
-
-
-
-// const configureStore = preloadedState => {
-//   const store = createStore(
-//     rootReducer,
-//     preloadedState,
-//     compose(
-//       applyMiddleware(thunk, api, createLogger()),
-//       DevTools.instrument()
-//     )
-//   )
-
-//   if (module.hot) {
-//     // Enable Webpack hot module replacement for reducers
-//     module.hot.accept('../reducers', () => {
-//       const nextRootReducer = require('../reducers').default
-//       store.replaceReducer(nextRootReducer)
-//     })
-//   }
-
-//   return store
-// }
-
-// export default configureStore

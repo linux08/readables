@@ -25,9 +25,13 @@
   width: 80%;
 }
 
-.divinline {
+.author {
 
+  margin-top: -80px;
   margin-left: 50%;
-  margin-top: -5.5%;
  
+}
+
+.time{
+  margin-left: 50%
 }

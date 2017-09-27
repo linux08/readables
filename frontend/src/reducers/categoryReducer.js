@@ -1,25 +1,23 @@
 
 const initialState = {
-  fetching: true,
-  fetched: false,
-  category: []
+  category:{},
+  posts: {}
 }
 
 
- export const categoryReducer = (state = initialState, action) => {
-  console.log(action.type)
+export const categoryReducer = (state=[], action) => {
 
-  //FETCH_CATEGORY_OF_A_POST_SUCCESS
+  console.log(action.type)
   switch (action.type) {
     case 'FETCH_CATEGORY_OF_A_POST_SUCCESS':
-      console.log('FETCH_CATEGORY_OF_A_POST_SUCCESS');
-      return { ...state, category: action.category }
-    case 'FETCH_POSTS_SUCCESS':
-      console.log('FETCH_POSTS_SUCCESS')
+     return { ...state, posts: action.data }
+    case 'FETCH_CATEGORY_SUCCESS':
+      console.log('FETCH_CATEGORY_SUCCESS')
+      console.log(action)
       return { ...state, category: action.category }
 
     default:
-      return { ...state, category: { 'a': '2' } };
+      return state;
   }
 };
 

@@ -3,71 +3,72 @@ import logo from './../logo.svg';
 import './../App.css'
 import { connect } from 'react-redux'
 import Header from './header'
-import { fetchCategoryOfAPost } from '../actions/categories.js'
+import Posts from './post'
+import { fetchCategoryOfAPost, fetchCategory } from '../actions/categories.js'
 
 class App extends Component {
 
   componentDidMount() {
-    // console.log('clicked here')
+
     this.props.click()
+    this.props.clickcategory()
+
   }
   render() {
-    console.log(this.props)
+    // this.props.click()
+    // this.props.category()
+
+    const post = this.props.posts.posts
+    const category = this.props.posts.category
+
+    // console.log(category)
+    // console.log(post)
+    // let post = this.props.category.posts
+
+    // console.log(this.props.category.categories)
+    // console.log(this.props.category.posts)
+    let posts = [
+      {
+        "id": "8xf0y6ziyjabvozdd253nd",
+        "timestamp": 1467166872634,
+        "title": "Udacity is the best place to learn React",
+        "body": "Everyone says so after all.",
+        "author": "thingtwo",
+        "category": "react",
+        "voteScore": 6,
+        "deleted": false
+      },
+      {
+        "id": "6ni6ok3ym7mf1p33lnez",
+        "timestamp": 1468479767190,
+        "title": "Learn Redux in 10 minutes!",
+        "body": "Just kidding. It takes more than 10 minutes to learn technology.",
+        "author": "thingone",
+        "category": "redux",
+        "voteScore": -5,
+        "deleted": false
+      }
+    ]
+
     return (
       <div >
-        <div className="App">
+      
           <Header />
-          <div className="positon-header">
-            <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button>
-            <div className="dropdown">
-              <select className="header-space btn btn-secondary dropdown-toggle header-space">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
-              </select>
-            </div>
-            <select className="btn btn-secondary dropdown-toggle header-space">
-              <option value="volvo">Sort by Timestamp</option>
-              <option value="saab">Sort by Date</option>
-            </select>
-          </div>
-          <hr />
-          <h4> Posts </h4>
+          <Posts  {...this.props} />
         </div>
-
-        <div className="">
-          <div style={{ margin: 30 }}>
-
-            <h1 className="display-3">Title</h1>
-            <br />
-            <div className="">
-              <p className="">Body</p>
-              <div className="">
-
-                <p className=""> Category: </p>
-                <p className=""> VoteSCore </p>
-              </div>
-              <div className="divinline">
-                <p className="">  Author: </p>
-                <p className=""> Comment </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { category: state };
+  return { posts: state.categoryReducer };
+
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    click: () => dispatch(fetchCategoryOfAPost())
+    click: () => dispatch(fetchCategoryOfAPost()),
+    clickcategory: () => dispatch(fetchCategory())
   }
 }
 

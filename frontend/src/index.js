@@ -9,7 +9,7 @@ import configureStore from './store/configureStore'
 
 
 const store = configureStore();
-// store.dispatch(fetchPosts)
+
 render(
     <Router>
         <Root store={store} />
