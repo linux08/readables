@@ -44,7 +44,7 @@ export const deleteSinglePost = (post) => {
     return (dispatch) => {
         return Axios.delete(apiUrl, post, {
             headers: {
-                "name": "react"
+                'Authorization': 'abimbola120@yahoo.com' 
             }
         })
             .then(response => {
@@ -60,7 +60,7 @@ export const updateSinglePost = (post) => {
     return (dispatch) => {
         return Axios.put(apiUrl, post, {
             headers: {
-                "name": "react"
+                'Authorization': 'abimbola120@yahoo.com' 
             }
         })
             .then(response => {
@@ -77,7 +77,7 @@ export const fetchSinglePosts = () => {
     return (dispatch) => {
         return Axios.get(apiUrl`/${'posts/:id'}`, {
             headers: {
-                "name": "react"
+                'Authorization': 'abimbola120@yahoo.com' 
             }
         })
             .then(response => {
@@ -94,7 +94,7 @@ export const createPost = (post) => {
     return (dispatch) => {
         return Axios.post(apiUrl, post, {
             headers: {
-                "name": "react"
+                'Authorization': 'abimbola120@yahoo.com' 
             }
         })
             .then(response => {
@@ -110,7 +110,7 @@ export const fetchPosts = () => {
     return (dispatch) => {
         return Axios.get(apiUrl`/${posts}`, {
             headers: {
-                "name": "react"
+                'Authorization': 'abimbola120@yahoo.com' 
             }
         })
             .then(response => {

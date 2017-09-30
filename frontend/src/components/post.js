@@ -6,52 +6,28 @@ const Posts = (props) => {
     console.log(props)
 
     const response = props.posts
-    const posts = response.posts
-    const category = response.category
+    const posts = response.postincategory
 
-    console.log(post)
- 
+    console.log(posts)
+    // const category = response.category
 
-    // let posts = [
-    //     {
-    //         "id": "8xf0y6ziyjabvozdd253nd",
-    //         "timestamp": 1467166872634,
-    //         "title": "Udacity is the best place to learn React",
-    //         "body": "Everyone says so after all.",
-    //         "author": "thingtwo",
-    //         "category": "react",
-    //         "voteScore": 6,
-    //         "deleted": false
-    //     },
-    //     {
-    //         "id": "6ni6ok3ym7mf1p33lnez",
-    //         "timestamp": 1468479767190,
-    //         "title": "Learn Redux in 10 minutes!",
-    //         "body": "Just kidding. It takes more than 10 minutes to learn technology.",
-    //         "author": "thingone",
-    //         "category": "redux",
-    //         "voteScore": -5,
-    //         "deleted": false
-    //     }
-    // ]
 
-    
     return (
         <div className="">
             <div className="App">
                 <div className="positon-header">
                     <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button>
-                    {/* {category.map((a,index) =>( */}
-                    <div className="dropdown">
-                        <select className="header-space btn btn-secondary dropdown-toggle header-space">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
+                    <div className="dropdown" >
+                        <select className="header-space btn btn-secondary dropdown-toggle header-space" onChange={(event) => props.changeEvent(event.target.value)}>
+                            {/* {category && category.categories.map((a, index) => ( */}
+                            <option value=''  >All</option>
+                            <option value='react'>React</option>
+                            <option value='redux'>Redux</option>
+                            <option value='udacity'>Udacity</option>
+                            )
+                                {/* )} */}
                         </select>
                     </div>
-
-                    {/* </div> ))} */}
                     <select className="btn btn-secondary dropdown-toggle header-space">
                         <option value="volvo">Sort by Timestamp</option>
                         <option value="saab">Sort by Date</option>
@@ -64,7 +40,7 @@ const Posts = (props) => {
 
 
             <div className="container small ">
-                {posts.map((p, index) => (
+                {posts && posts.map((p, index) => (
                     <div key={index}>
                         {/* "display-3" */}
                         <Link to={'/'}>  <h1 className="" >Title: {p.title}</h1> </Link>
@@ -76,11 +52,15 @@ const Posts = (props) => {
                                 <p className="">Vote:<button> <i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {p.voteScore}  <button> <i className="fa fa-thumbs-up" aria-hidden="true"></i> </button> </p>
 
                                 <p className="author"> Author: {p.author} </p>
-                                <p className="time"> Time: {p.timestamp}</p>
+                                <p className="time"> Comments:<i className="fa fa-comment" aria-hidden="true"></i></p>
                             </div>
                         </div>
                         <br />
-
+                        <div className="belowpost">
+                            <button>Edit: <i className="fa fa-pencil-square-o" aria-hidden="true"></i> </button>
+                            <button className="delete">Delete: <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
+                        </div>
+                        <br />
                         {/* </div> */}
                     </div>))}
             </div>

@@ -4,18 +4,18 @@ import { Provider } from 'react-redux'
 
 import { Route } from 'react-router-dom'
 import App from '../components/App'
-//import {Route, IndexRoute} from 'react-router';
+import Category from '../components/category'
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <div>
       <Route exact path="/" component={App} />
-      <Route path="/:category"
+      <Route exact path="/:category"
+        component={Category} />
+      <Route exact path="/:category/:post_id"
         component={App} />
-      <Route path="/:category/:post_id"
-        component={App} />
-      <Route path="/create/post"
-        component={App} />
+      <Route exact path="/create/post"
+        component={Category} />
       {/* <Route exact path ='/edit' component={App} /> */}
 
     </div>

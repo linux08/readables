@@ -20,18 +20,25 @@
 }
 
 .boxed {
-  border: 1px solid green ;
+  border: 1px solid green;
   border-width: medium;
   width: 80%;
 }
 
 .author {
-
   margin-top: -80px;
   margin-left: 50%;
- 
 }
 
-.time{
+.time {
   margin-left: 50%
+}
+
+.delete {
+  margin-left: 200px;
+  margin-top: -40px;
+}
+
+.belowpost {
+  margin-left: 70px;
 }

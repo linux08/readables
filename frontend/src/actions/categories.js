@@ -1,4 +1,5 @@
 import * as actionTypes from './actiontypes';
+import * as API from '../utils/API.js'
 import Axios from 'axios'
 
 
@@ -16,39 +17,71 @@ export const fetchCategoryOfAPostSuccess = (data) => {
     }
 };
 
+export const fetchPostInCategorySuccess = (data) => {
+    return {
+        type: actionTypes.FETCH_POST_IN_CATEGORY_SUCCESS,
+        data
+    }
+}
 
-
-export const fetchCategoryOfAPost = () => {
-
-    return async (dispatch) => {
-        try {
-            const response =  await Axios.get('http://localhost:5001/posts',
-                {
-                    headers: { 'Authorization': 'whatever-you-want' }
-                })
-            console.log('trying asyn await in post')
-            console.log(response)
-            return  dispatch(fetchCategoryOfAPostSuccess(response.data))
-        }
-        catch (err) {
-            console.log(err)
-        }
-    };
+export const fetchDetailsForSinglePostSuccess = (comment) => {
+    return {
+        type: actionTypes.FETCH_DETAILS_FOR_SINGLE_POST_SUCCESS,
+        comment
+    }
 };
+
+
+export const fetchPostInCategory = () => {
+
+    return function (dispatch) {
+        return API.FetchCategory()
+            .then((res) => {
+                console.log(res)
+                dispatch(fetchCategorySuccess(res.data))
+            })
+            .then(() => API.fetchPosts())
+            .then((data) => {
+                console.log(data.data.map((d) => d.id))
+                dispatch(fetchPostInCategorySuccess(data.data))
+                data.data.map((d) => API.fetchCommentSinglePost(d.id)
+                    .then(res => dispatch(fetchDetailsForSinglePostSuccess(res.data))))
+                // console.log(res.data)))
+            })
+
+
+            .catch(err => console.log(err))
+
+
+        // };
+    }
+}
 
 
 export const fetchCategory = () => {
-    return async (dispatch) => {
-        try {
-            const response = await Axios.get('http://localhost:5001/categories', {
-                headers: { "Access-Control-Allow-Origin": "*", 'Authorization': 'whatever-you-want' }
-            })
-            return dispatch(fetchCategorySuccess(response.data))
-        }
-        catch (err) {
-            console.log(err)
-        }
-        
-    };
-};
+    return function (dispatch) {
+        return API.FetchCategory()
+            .then((res) => {
+                console.log(res)
+                dispatch(fetchCategorySuccess(res.data))
+            }).catch(err => console.log(err))
+
+    }
+}
+
+
+
+export const fetchCategoryOfPost = (category) => {
+    console.log('e dey here')
+    return function (dispatch) {
+        return API.fetchPostInCategory(category)
+            .then((res) => {
+                console.log(res)
+                dispatch(fetchPostInCategorySuccess(res.data))
+            }).catch(err => console.log(err))
+
+    }
+}
+
+
 
