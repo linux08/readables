@@ -31,31 +31,57 @@ export const fetchDetailsForSinglePostSuccess = (comment) => {
     }
 };
 
+export const upVote = (post) => {
+    return {
+        type: actionTypes.INCREASE_VOTE_FOR_SINGLE_POST_SUCCESS,
+        post
+    }
+}
+
+export const downVote = (post) => {
+    return {
+        type: actionTypes.DECREASE_VOTE_FOR_SINGLE_POST_SUCCESS,
+        post
+    }
+}
+
+
 
 export const fetchPostInCategory = () => {
 
     return function (dispatch) {
-        return API.FetchCategory()
-            .then((res) => {
-                console.log(res)
-                dispatch(fetchCategorySuccess(res.data))
-            })
-            .then(() => API.fetchPosts())
+        return API.fetchPosts()
             .then((data) => {
-                console.log(data.data.map((d) => d.id))
                 dispatch(fetchPostInCategorySuccess(data.data))
-                data.data.map((d) => API.fetchCommentSinglePost(d.id)
-                    .then(res => dispatch(fetchDetailsForSinglePostSuccess(res.data))))
-                // console.log(res.data)))
             })
-
-
             .catch(err => console.log(err))
-
-
-        // };
     }
 }
+
+
+export const downvote = (id, option) => {
+    return function (dispatch) {
+        return API.vote(id, option)
+            .then((res) => {
+                console.log(res)
+                dispatch(upVote(res.data))
+            }).catch(err => console.log(err))
+
+    }
+}
+
+
+export const upvote = (id, option) => {
+    return function (dispatch) {
+        return API.vote(id, option)
+            .then((res) => {
+                console.log(res)
+                dispatch(downVote(res.data))
+            }).catch(err => console.log(err))
+
+    }
+}
+
 
 
 export const fetchCategory = () => {
@@ -72,7 +98,7 @@ export const fetchCategory = () => {
 
 
 export const fetchCategoryOfPost = (category) => {
-    console.log('e dey here')
+
     return function (dispatch) {
         return API.fetchPostInCategory(category)
             .then((res) => {
@@ -82,6 +108,5 @@ export const fetchCategoryOfPost = (category) => {
 
     }
 }
-
 
 

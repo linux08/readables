@@ -22,6 +22,7 @@ class Category extends Component {
         //http://localhost:5001/react/posts
     }
     render() {
+        console.log(this.props)
         const url = window.location.href
         const params = url.split('/')
         const category = params[3]
@@ -79,7 +80,7 @@ class Category extends Component {
 }
 
 function mapStateToProps(state) {
-    return { postsincategory: state.categoryReducer };
+    return { postsincategory: state.categorys };
 
 }
 

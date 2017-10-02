@@ -2,6 +2,17 @@ import Axios from 'axios'
 
 const BASE_URL = 'http://localhost:5001/'
 
+export const vote = (id, option) => {
+    return Axios.post(BASE_URL +'posts/' + id, {
+        option: `${option}`
+    }, {
+            headers: { 'Authorization': 'abimbola120@yahoo.com' }
+        })
+        .then(res => res)
+}
+
+
+
 export const fetchPostInCategory = (category) => {
     return Axios.get(BASE_URL + category + '/posts', {
         headers: { 'Authorization': 'abimbola120@yahoo.com' }
@@ -13,7 +24,7 @@ export const fetchCategoryOfAPost = () => {
     return Axios.get(BASE_URL + 'posts', {
         headers: { 'Authorization': 'abimbola120@yahoo.com' }
     })
-        .then(res => res.json())
+        .then(res => res.json)
 }
 
 export const FetchCategory = () => {

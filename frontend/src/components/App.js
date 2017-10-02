@@ -5,36 +5,45 @@ import { connect } from 'react-redux'
 import Header from './header'
 import Posts from './post'
 import Footer from './footer'
-import { fetchCategory ,fetchPostInCategory } from '../actions/categories.js'
-// import { fetchDetailsForSinglePost } from '../actions/comment.js'
-//fetchCategoryOfAPost, 
+import { fetchCategory, fetchPostInCategory, upvote, downvote } from '../actions/categories.js'
+import { fetchComment } from '../actions/comment.js'
+import * as API from '../utils/API.js'
+import _map from 'lodash.map'
+
 
 class App extends Component {
 
   componentDidMount() {
 
-    this.props.click()
-    this.props.clickcategory()
+    this.props.fetchpost().then(() => _map(this.props.posts.postincategory, post => {
+      this.props.fetchcomment(post.id)
+    }))
+
+    this.props.fetchcategory()
   }
 
   changeEvent(url) {
     window.location.href = 'http://localhost:3000/' + url
   }
 
+  upvote(id, option) {
+    this.props.upvote(id, "upVote")
+  }
+
+  downvote(id, option) {
+    this.props.upvote(id, "upVote")
+  }
+
+
+
   render() {
-    // this.props.click()
-    // this.props.category()
-
-    // const post = this.props.posts.posts
-    // const category = this.props.posts.category
-
 
 
     return (
       <div >
 
         <Header />
-        <Posts  {...this.props} changeEvent={this.changeEvent} />
+        <Posts  {...this.props} changeEvent={this.changeEvent} getCommentCount={this.getCommentCount}  />
         <br />
         <br />
         <Footer />
@@ -43,16 +52,20 @@ class App extends Component {
   }
 }
 
+
+
 function mapStateToProps(state) {
-  return { posts: state.categoryReducer };
+  return { posts: state.categorys, comment: state.comments };
 
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-     click: () => dispatch(fetchPostInCategory()),
-    clickcategory: () => dispatch(fetchCategory()),
-
+    fetchpost: () => dispatch(fetchPostInCategory()),
+    fetchcategory: () => dispatch(fetchCategory()),
+    fetchcomment: (id) => dispatch(fetchComment(id)),
+    upvote: (id, option) => dispatch(upvote(id, option)),
+    downvote: (id, option) => dispatch(downvote(id, option))
   }
 }
 
