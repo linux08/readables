@@ -5,19 +5,44 @@ export const categoryReducer = (state = [], action) => {
   switch (action.type) {
 
     case 'FETCH_CATEGORY_SUCCESS':
-      //return { ...state, [action.category.id]: action.category }
       return { ...state, category: action.category }
-    case 'FETCH_POST_IN_CATEGORY_SUCCESS':
-      let a = action.data.map(b => b.id)
-      console.log(a)
+    case 'FETCH_POSTS_SUCCESS':
+      let posts = {}
+      for (let num in action.data) {
+        posts[action.data[num].id] = action.data[num]
+      }
+      return { ...state, posts }
+
+
+
+    case 'FETCH_CATEGORY_OF_A_POST_SUCCESS':
       return { ...state, postincategory: action.data }
-    // return { ...state, [action.category.id]: action.category }
-    // case "INCREASE_VOTE_FOR_SINGLE_POST_SUCCESS":
-    //   console.log(action.posts)
-    //   return action
-    // case "DECREASE_VOTE_FOR_SINGLE_POST_SUCCESS":
-    //   console.log(action.posts)
-    //   return action
+
+
+    case "INCREASE_VOTE_FOR_SINGLE_POST_SUCCESS":
+      let newState = state.posts
+      newState = Object.keys(newState).map((p) => {
+        if (newState[p].id == action.id) {
+
+          newState[p].voteScore = action.post.voteScore
+          console.log(newState)
+          return newState
+        }
+      })
+      return { ...state, newState }
+
+    case "DECREASE_VOTE_FOR_SINGLE_POST_SUCCESS":
+       newState = state.posts
+      newState = Object.keys(newState).map((p) => {
+        if (newState[p].id == action.id) {
+
+          newState[p].voteScore = action.post.voteScore
+          console.log(newState)
+          return newState
+        }
+      })
+      return { ...state, newState }
+
 
     default:
       return state;

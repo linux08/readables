@@ -53,9 +53,7 @@ export const fetchComment = (id) => {
     return function (dispatch) {
         return API.fetchCommentSinglePost(id)
             .then((res) => {
-                // console.log('trying to get comment')
-                // console.log('it got here')
-                // console.log(res)
+               console.log(res.data)
                dispatch(fetchCommentForSinglePostSuccess(res.data,id))
             }).catch(err => {throw (err)})
     }

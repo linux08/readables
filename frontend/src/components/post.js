@@ -6,10 +6,12 @@ import moment from 'moment'
 const Posts = (props) => {
     console.log(props)
 
-    // props.upvote("8xf0y6ziyjabvozdd253nd","upVote")
+    
 
     const response = props.posts
-    const posts = response.postincategory
+    //console.log(response)
+    const posts = response.posts
+    console.log(posts)
     const comment = props.comment
 
 
@@ -40,24 +42,27 @@ const Posts = (props) => {
                 <h4> Posts </h4>
             </div>
             <br />
-
+{/* {
+    Object.keys(myObject).map
+    posts && posts.map((p, index) => (
+} */}
 
             <div className="container small ">
-                {posts && posts.map((p, index) => (
+                {   posts && Object.keys(posts).map((p, index) => ( console.log(posts[p].title),
 
                     <div key={index}>
                         {/* "display-3" */}
-                        <Link to={'/'}>  <h1 className="" >Title: {p.title}</h1> </Link>
+                        <Link to={'/'}>  <h1 className="" >Title: {posts[p].title}</h1> </Link>
                         <br />
                         <div className="">
-                            <p className=""> Body: {p.body}</p>
+                            <p className=""> Body: {posts[p].body}</p>
                             <div className="">
-                                <p className=""> Category: {p.category} </p>
-                                <p className="">Vote:<button onClick={(e) =>props.downvote(p.id,"downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {p.voteScore}  <button onClick={(e) =>props.upvote(p.id,"upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
+                                <p className=""> Category: {posts[p].category} </p>
+                                <p className="">Vote:<button onClick={(e) =>props.downvote(posts[p].id,"downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {posts[p].voteScore}  <button onClick={(e) =>props.upvote(posts[p].id,"upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
 
-                                <p className="author"> Author: {p.author} </p>
-                                <p className="time" > Time: { moment(p.timestamp).format("MM/DD/YYYY")} </p>
-                                <p className="time"> Comments:{(comment[p.id] || []).length}  <i className="fa fa-comment" aria-hidden="true"></i></p>
+                                <p className="author"> Author: {posts[p].author} </p>
+                                <p className="time" > Time: { moment(posts[p].timestamp).format("MM/DD/YYYY")} </p>
+                                <p className="time"> Comments:{(comment[posts[p].id] || []).length}  <i className="fa fa-comment" aria-hidden="true"></i></p>
                             </div>
                         </div>
                         <br />

@@ -15,7 +15,7 @@ class App extends Component {
 
   componentDidMount() {
 
-    this.props.fetchpost().then(() => _map(this.props.posts.postincategory, post => {
+    this.props.fetchpost().then(() => _map(this.props.posts.posts, post => {
       this.props.fetchcomment(post.id)
     }))
 

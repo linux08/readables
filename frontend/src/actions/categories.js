@@ -10,16 +10,16 @@ export const fetchCategorySuccess = (category) => {
     }
 };
 
-export const fetchCategoryOfAPostSuccess = (data) => {
+export const fetchPostInCategorySuccess = (data) => {
     return {
         type: actionTypes.FETCH_CATEGORY_OF_A_POST_SUCCESS,
         data
     }
 };
 
-export const fetchPostInCategorySuccess = (data) => {
+export const fetchPost = (data) => {
     return {
-        type: actionTypes.FETCH_POST_IN_CATEGORY_SUCCESS,
+        type: actionTypes.FETCH_POSTS_SUCCESS,
         data
     }
 }
@@ -31,17 +31,19 @@ export const fetchDetailsForSinglePostSuccess = (comment) => {
     }
 };
 
-export const upVote = (post) => {
+export const upVote = (post,id) => {
     return {
         type: actionTypes.INCREASE_VOTE_FOR_SINGLE_POST_SUCCESS,
-        post
+        post,
+        id
     }
 }
 
-export const downVote = (post) => {
+export const downVote = (post,id) => {
     return {
         type: actionTypes.DECREASE_VOTE_FOR_SINGLE_POST_SUCCESS,
-        post
+        post,
+        id
     }
 }
 
@@ -52,7 +54,10 @@ export const fetchPostInCategory = () => {
     return function (dispatch) {
         return API.fetchPosts()
             .then((data) => {
-                dispatch(fetchPostInCategorySuccess(data.data))
+                console.log('getting fetch category of a post')
+                console.log(data.data)
+                    dispatch(fetchPost(data.data))
+              //  })
             })
             .catch(err => console.log(err))
     }
@@ -64,19 +69,19 @@ export const downvote = (id, option) => {
         return API.vote(id, option)
             .then((res) => {
                 console.log(res)
-                dispatch(upVote(res.data))
+                dispatch(downVote(res.data,id))
             }).catch(err => console.log(err))
 
     }
 }
 
-
+//
 export const upvote = (id, option) => {
     return function (dispatch) {
         return API.vote(id, option)
             .then((res) => {
                 console.log(res)
-                dispatch(downVote(res.data))
+                dispatch(upVote(res.data,id))
             }).catch(err => console.log(err))
 
     }
@@ -102,6 +107,7 @@ export const fetchCategoryOfPost = (category) => {
     return function (dispatch) {
         return API.fetchPostInCategory(category)
             .then((res) => {
+               
                 console.log(res)
                 dispatch(fetchPostInCategorySuccess(res.data))
             }).catch(err => console.log(err))
