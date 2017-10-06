@@ -6,7 +6,7 @@ import moment from 'moment'
 const Posts = (props) => {
     console.log(props)
 
-    
+
 
     const response = props.posts
     //console.log(response)
@@ -30,25 +30,43 @@ const Posts = (props) => {
                             <option value='redux'>Redux</option>
                             <option value='udacity'>Udacity</option>
                             )
-                                {/* )} */}
+                                {/* )}  className="btn btn-info" className="btn btn-primary" */}
                         </select>
                     </div>
-                    <select className="btn btn-secondary dropdown-toggle header-space">
+                   
+                    <div className="dropdown">
+
+                        <select className="btn btn-secondary dropdown-toggle header-space" onClick={(event) => {
+                            if (event.target.value === "time") {
+                                props.sortbydate(posts)
+
+                            }
+                            if (event.target.value === "vote") {
+                                props.sortbyvote(posts)
+
+                            }
+                            else {
+                                console.log('nothing selected')
+                            }
+                        }}>
+                            <option disabled="" value="">Filter Post</option>
+                            <option value="time" >Sort by Timestamp</option>
+                            <option value="vote">Sort by Vote</option>
+                        </select>
+                    </div>
+
+                    {/* <select className="btn btn-secondary dropdown-toggle header-space">
                         <option value="volvo">Sort by Timestamp</option>
                         <option value="saab">Sort by Date</option>
-                    </select>
+                    </select> */}
                 </div>
                 <hr />
                 <h4> Posts </h4>
             </div>
             <br />
-{/* {
-    Object.keys(myObject).map
-    posts && posts.map((p, index) => (
-} */}
 
             <div className="container small ">
-                {   posts && Object.keys(posts).map((p, index) => ( console.log(posts[p].title),
+                {posts && Object.keys(posts).map((p, index) => (
 
                     <div key={index}>
                         {/* "display-3" */}
@@ -58,10 +76,10 @@ const Posts = (props) => {
                             <p className=""> Body: {posts[p].body}</p>
                             <div className="">
                                 <p className=""> Category: {posts[p].category} </p>
-                                <p className="">Vote:<button onClick={(e) =>props.downvote(posts[p].id,"downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {posts[p].voteScore}  <button onClick={(e) =>props.upvote(posts[p].id,"upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
+                                <p className="">Vote:<button onClick={(e) => props.downvote(posts[p].id, "downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {posts[p].voteScore}  <button onClick={(e) => props.upvote(posts[p].id, "upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
 
                                 <p className="author"> Author: {posts[p].author} </p>
-                                <p className="time" > Time: { moment(posts[p].timestamp).format("MM/DD/YYYY")} </p>
+                                <p className="time" > Time: {moment(posts[p].timestamp).format("MM/DD/YYYY")} </p>
                                 <p className="time"> Comments:{(comment[posts[p].id] || []).length}  <i className="fa fa-comment" aria-hidden="true"></i></p>
                             </div>
                         </div>

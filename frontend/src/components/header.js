@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
     return (
-        <div className="list-books-title">
-            <h1> MY READABLES PROJECT</h1>
+        <div className="fixed-top list-books-title  ">
+            <Link to="/"> <h1> MY READABLES PROJECT</h1> </Link>
         </div>
     )
 }

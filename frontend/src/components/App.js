@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Header from './header'
 import Posts from './post'
 import Footer from './footer'
-import { fetchCategory, fetchPostInCategory, upvote, downvote } from '../actions/categories.js'
+import { fetchCategory, fetchPostInCategory, upvote, downvote, sortByTime, sortByVote } from '../actions/categories.js'
 import { fetchComment } from '../actions/comment.js'
 import * as API from '../utils/API.js'
 import _map from 'lodash.map'
@@ -14,7 +14,7 @@ import _map from 'lodash.map'
 class App extends Component {
 
   componentDidMount() {
-
+    console.log(this.props)
     this.props.fetchpost().then(() => _map(this.props.posts.posts, post => {
       this.props.fetchcomment(post.id)
     }))
@@ -23,7 +23,8 @@ class App extends Component {
   }
 
   changeEvent(url) {
-    window.location.href = 'http://localhost:3000/' + url
+    console.log('hehe')
+    //window.location.href = 'http://localhost:3000/' + url
   }
 
   upvote(id, option) {
@@ -32,6 +33,22 @@ class App extends Component {
 
   downvote(id, option) {
     this.props.upvote(id, "upVote")
+  }
+
+  sortVote(data) {
+    console.log(data)
+    console.log('sorting by date')
+    //this.props.sortbydate(data)
+    this.props.fetchcategory()
+  }
+  // sortbydate
+  //sortbytime
+  sortTime(data) {
+    console.log(data)
+    console.log('sorting by time')
+    this.props.fetchcategory()
+    // fetchcomment
+  //  this.props.fetchcomment(data)
   }
 
 
@@ -43,7 +60,13 @@ class App extends Component {
       <div >
 
         <Header />
-        <Posts  {...this.props} changeEvent={this.changeEvent} getCommentCount={this.getCommentCount}  />
+        <Posts
+          {...this.props}
+          changeEvent={this.changeEvent}
+          getCommentCount={this.getCommentCount}
+          sortVote={this.sortVote}
+          sortTime={this.sortTime}
+        />
         <br />
         <br />
         <Footer />
@@ -65,7 +88,9 @@ function mapDispatchToProps(dispatch) {
     fetchcategory: () => dispatch(fetchCategory()),
     fetchcomment: (id) => dispatch(fetchComment(id)),
     upvote: (id, option) => dispatch(upvote(id, option)),
-    downvote: (id, option) => dispatch(downvote(id, option))
+    downvote: (id, option) => dispatch(downvote(id, option)),
+    sortbydate: (data) => dispatch(sortByTime(data)),
+    sortbyvote: (data) => dispatch(sortByVote(data))
   }
 }
 
