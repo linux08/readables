@@ -44,64 +44,54 @@ export const categoryReducer = (state = [], action) => {
       })
       return { ...state, newState }
 
+
+
+
     case "SORT_BY_VOTE":
-    // function sortObject(obj) {
-    //   return Object.keys(obj)
-    //     .sort().reduce((a, v) => {
-    //     a[v] = obj[v];
-    //     return a; }, {});
-    // }
-      
-    var keys = Object.keys(state.posts);
 
-    keys.sort((a, b) => {
-      if (a.voteScore < b.voteScore) {
-        return -1;
+      var statearray = Object.values(state.posts)
+      let aa = statearray.sort(function (a, b) {
+        return b.voteScore - a.voteScore
+      })
+      posts = {}
+      for (let num in aa) {
+
+        posts[aa[num].id] = aa[num]
       }
-      if (a.voteScore > b.voteScore) {
-        return 1;
-      }
-      // a.voteScore must be equal to b.voteScore
-      return 0;
-    }).reduce((a,v) => {
-      console.log(state.posts[v])
-      console.log(state.posts[a])
-      return state.posts[v]
-    },{})
-    console.log(keys)
-    // var comment = keys.map(key => state.posts[key]);
-    // console.log(comment)
-    // comment.sort((a, b) => {
-    //   if (a.voteScore < b.voteScore) {
-    //     return -1;
-    //   }
-    //   if (a.voteScore > b.voteScore) {
-    //     return 1;
-    //   }
-    //   // a.voteScore must be equal to b.voteScore
-    //   return 0;
-    // });
-    //console.log(comment)
+
+      console.log(posts)
+      return { ...state, posts }
+
+
     case "SORT_BY_TIME":
-      // const sbt = [state.posts]
 
-      // let aa = sbt.sort(function (a, b) {
-      //   let date1 = b.timestamp
-      //   let date2 = a.timestamp
-      //   if (date1 < date2) {
-      //     return -1
-      //   }
-      //   if (date1 > date2) {
-      //     return 1
-      //   }
-      //   return 0
-      // })
-      // console.log(aa)
+      var statearray = Object.values(state.posts)
+      aa = statearray.sort(function (a, b) {
+        let date1 = b.timestamp
 
-    // return aa
+        let date2 = a.timestamp
+
+        if (date1 < date2) {
+          return -1
+        }
+        if (date1 > date2) {
+          return 1
+        }
+        return 0
+      })
+      posts = {}
+      for (let num in aa) {
+        posts[aa[num].id] = aa[num]
+      }
+
+      return { ...state, posts }
+
 
     default:
       return state;
   }
 };
+
+
+
 
