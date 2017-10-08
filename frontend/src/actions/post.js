@@ -5,11 +5,21 @@ const apiUrl = 'http://localhost/5001';
 
 
 
+export const deleteSingleComment = (id, data) => {
+    return {
+        type: actionTypes.DELETE_POST_SUCCESS,
+        id,
+        data
+    }
+}
 
-export const fetchSinglePostSuccess = (posts) => {
+
+
+export const fetchSinglePostSuccess = (posts, id) => {
     return {
         type: actionTypes.FETCH_SINGLE_POSTS_SUCCESS,
-        posts
+        posts,
+        id
     }
 };
 
@@ -43,7 +53,7 @@ export const fetchSinglePosts = (id) => {
         return API.fetchDetailsForSinglePost(id)
             .then((res) => {
                 console.log(res)
-                dispatch(fetchSinglePostSuccess(res.data))
+                dispatch(fetchSinglePostSuccess(res.data, id))
             }).catch(err => console.log(err))
     }
 

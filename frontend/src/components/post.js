@@ -13,7 +13,7 @@ const Posts = (props) => {
     const posts = response.posts
     console.log(posts)
     const comment = props.comment
-
+   
 
 
 
@@ -55,10 +55,7 @@ const Posts = (props) => {
                         </select>
                     </div>
 
-                    {/* <select className="btn btn-secondary dropdown-toggle header-space">
-                        <option value="volvo">Sort by Timestamp</option>
-                        <option value="saab">Sort by Date</option>
-                    </select> */}
+                   
                 </div>
                 <hr />
                 <h4> Posts </h4>

@@ -3,10 +3,25 @@ import * as API from '../utils/API.js'
 import Axios from 'axios'
 
 
+export const commentUpVote = (post, id) => {
+    return {
+        type: actionTypes.INCREASE_VOTE_FOR_SINGLE_COMMENT_SUCCESS,
+        post,
+        id
+    }
+}
+
+export const commentDownVote = (post, id) => {
+    return {
+        type: actionTypes.DECREASE_VOTE_FOR_SINGLE_COMMENT_SUCCESS,
+        post,
+        id
+    }
+}
 
 
 
-export const fetchCommentForSinglePostSuccess = (comment,id) => {
+export const fetchCommentForSinglePostSuccess = (comment, id) => {
     return {
         type: actionTypes.FETCH_COMMENT_FOR_SINGLE_POST_SUCCESS,
         comment,
@@ -44,20 +59,56 @@ export const deleteCommentSuccess = (comment) => {
 };
 
 
-// data.data.map((d) => API.fetchCommentSinglePost(d.id)
-//     .then((res) => {dispatch(fetchDetailsForSinglePostSuccess(res.data))})
-// 
 
 export const fetchComment = (id) => {
- 
+
     return function (dispatch) {
         return API.fetchCommentSinglePost(id)
             .then((res) => {
-               console.log(res.data)
-               dispatch(fetchCommentForSinglePostSuccess(res.data,id))
-            }).catch(err => {throw (err)})
+                console.log(res.data)
+                dispatch(fetchCommentForSinglePostSuccess(res.data, id))
+            }).catch(err => { throw (err) })
     }
 }
+
+export const commentdownvote = (id, option) => {
+    return function (dispatch) {
+        return API.commentvote(id, option)
+            .then((res) => {
+                console.log(res)
+                dispatch(commentDownVote(res.data, id))
+            }).catch(err => console.log(err))
+
+    }
+}
+
+//
+export const commentupvote = (id, option) => {
+    return function (dispatch) {
+        return API.commentvote(id, option)
+            .then((res) => {
+                console.log(res)
+                dispatch(commentUpVote(res.data, id))
+            }).catch(err => console.log(err))
+
+    }
+}
+
+export const deleteComment = (id) => {
+    return function (dispatch) {
+        return API.deleteSinglePost(id)
+            .then((data) => {
+                console.log('deleting post')
+                // console.log(data.data)
+                dispatch(deleteCommentSuccess(id, data))
+                //  })
+            })
+            .catch(err => console.log(err))
+    }
+}
+
+
+
 
 
 

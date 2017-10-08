@@ -35,19 +35,14 @@ class App extends Component {
   }
 
   sortVote(data) {
-    console.log(data)
-    console.log('sorting by date')
-    //this.props.sortbydate(data)
+   
     this.props.fetchcategory()
   }
-  // sortbydate
-  //sortbytime
+ 
   sortTime(data) {
-    console.log(data)
-    console.log('sorting by time')
+ 
     this.props.fetchcategory()
-    // fetchcomment
-    //  this.props.fetchcomment(data)
+   
   }
 
 

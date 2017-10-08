@@ -33,6 +33,15 @@ export const createPost = (post) => {
         .then(res => res)
 }
 
+export const commentvote = (id, option) => {
+    return Axios.post(BASE_URL + 'comments/' + id, {
+        option: `${option}`
+    }, {
+            headers: { 'Authorization': 'abimbola120@yahoo.com' }
+        })
+        .then(res => res)
+}
+
 export const vote = (id, option) => {
     return Axios.post(BASE_URL + 'posts/' + id, {
         option: `${option}`
