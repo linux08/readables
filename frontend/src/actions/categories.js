@@ -1,6 +1,29 @@
 import * as actionTypes from './actiontypes';
 import * as API from '../utils/API.js'
-import Axios from 'axios'
+
+
+
+export const deleteSinglePost = (id,data) => {
+    return {
+        type: actionTypes.DELETE_POST_SUCCESS,
+        id,
+        data
+    }
+}
+
+// export const createPost =(id) =>{
+//     return {
+//         type: actionTypes.DELETE_POST_SUCCESS,
+//         id
+//     }
+// }
+
+// export const updatePost =(id) =>{
+//     return {
+//         type: actionTypes.DELETE_POST_SUCCESS,
+//         id
+//     }
+// }
 
 
 export const sortByVote = (data) => {
@@ -62,6 +85,19 @@ export const downVote = (post, id) => {
     }
 }
 
+
+export const deletePost = (id) => {
+    return function (dispatch) {
+        return API.deleteSinglePost(id)
+            .then((data) => {
+                console.log('deleting post')
+                // console.log(data.data)
+                dispatch(deleteSinglePost(id,data))
+                //  })
+            })
+            .catch(err => console.log(err))
+    }
+}
 
 
 export const fetchPostInCategory = () => {

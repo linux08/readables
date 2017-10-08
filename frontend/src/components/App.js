@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Header from './header'
 import Posts from './post'
 import Footer from './footer'
-import { fetchCategory, fetchPostInCategory, upvote, downvote, sortByTime, sortByVote } from '../actions/categories.js'
+import { fetchCategory, fetchPostInCategory, upvote, downvote, sortByTime, sortByVote, deletePost } from '../actions/categories.js'
 import { fetchComment } from '../actions/comment.js'
 import * as API from '../utils/API.js'
 import _map from 'lodash.map'
@@ -23,8 +23,7 @@ class App extends Component {
   }
 
   changeEvent(url) {
-    console.log('hehe')
-    //window.location.href = 'http://localhost:3000/' + url
+    window.location.href = 'http://localhost:3000/' + url
   }
 
   upvote(id, option) {
@@ -48,7 +47,7 @@ class App extends Component {
     console.log('sorting by time')
     this.props.fetchcategory()
     // fetchcomment
-  //  this.props.fetchcomment(data)
+    //  this.props.fetchcomment(data)
   }
 
 
@@ -90,7 +89,8 @@ function mapDispatchToProps(dispatch) {
     upvote: (id, option) => dispatch(upvote(id, option)),
     downvote: (id, option) => dispatch(downvote(id, option)),
     sortbydate: (data) => dispatch(sortByTime(data)),
-    sortbyvote: (data) => dispatch(sortByVote(data))
+    sortbyvote: (data) => dispatch(sortByVote(data)),
+    deletepost: (id) => dispatch(deletePost(id))
   }
 }
 

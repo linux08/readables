@@ -1,11 +1,16 @@
- export const postReducer = (state = [], action) => {
+export const postReducer = (state = [], action) => {
   switch (action.type) {
-    case "INCREASE_VOTE_FOR_SINGLE_POST_SUCCESS":
+    case "FETCH_SINGLE_POSTS_SUCCESS":
       console.log(action)
-      return action
-      case "DECREASE_VOTE_FOR_SINGLE_POST_SUCCESS":
-      console.log(action)
-      return action
+      state= action.posts
+      return state
+    //  return {state,post:action.posts}
+    // case "INCREASE_VOTE_FOR_SINGLE_POST_SUCCESS":
+    //   console.log(action)
+    //   return action
+    // case "DECREASE_VOTE_FOR_SINGLE_POST_SUCCESS":
+    //   console.log(action)
+    //   return action
     default:
       return state;
   }

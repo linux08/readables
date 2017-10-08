@@ -1,15 +1,10 @@
-import * as actionTypes from './actiontypes';
-import axios from 'axios'
+import * as actionTypes from './actiontypes'
+import * as API from '../utils/API.js'
 
 const apiUrl = 'http://localhost/5001';
 
 
-export const fetchPostSuccess = (posts) => {
-    return {
-        type: actionTypes.FETCH_POSTS_SUCCESS,
-        posts
-    }
-};
+
 
 export const fetchSinglePostSuccess = (posts) => {
     return {
@@ -40,84 +35,87 @@ export const deletePostSuccess = (post) => {
     }
 };
 
-export const deleteSinglePost = (post) => {
-    return (dispatch) => {
-        return Axios.delete(apiUrl, post, {
-            headers: {
-                'Authorization': 'abimbola120@yahoo.com' 
-            }
-        })
-            .then(response => {
-                dispatch(deletePostSucces(response.data))
-            })
-            .catch(error => {
-                throw (error);
-            });
-    };
-};
-
-export const updateSinglePost = (post) => {
-    return (dispatch) => {
-        return Axios.put(apiUrl, post, {
-            headers: {
-                'Authorization': 'abimbola120@yahoo.com' 
-            }
-        })
-            .then(response => {
-                dispatch(updateSinglePostSuccess(response.data))
-            })
-            .catch(error => {
-                throw (error);
-            });
-    };
-};
 
 
-export const fetchSinglePosts = () => {
-    return (dispatch) => {
-        return Axios.get(apiUrl`/${'posts/:id'}`, {
-            headers: {
-                'Authorization': 'abimbola120@yahoo.com' 
-            }
-        })
-            .then(response => {
-                dispatch(fetchSinglePostSuccess(response.data))
-            })
-            .catch(error => {
-                throw (error);
-            });
-    };
-};
+export const fetchSinglePosts = (id) => {
+
+    return function (dispatch) {
+        return API.fetchDetailsForSinglePost(id)
+            .then((res) => {
+                console.log(res)
+                dispatch(fetchSinglePostSuccess(res.data))
+            }).catch(err => console.log(err))
+    }
+
+}
 
 
-export const createPost = (post) => {
-    return (dispatch) => {
-        return Axios.post(apiUrl, post, {
-            headers: {
-                'Authorization': 'abimbola120@yahoo.com' 
-            }
-        })
-            .then(response => {
-                dispatch(createPostSuccess(response.data))
-            })
-            .catch(error => {
-                throw (error);
-            });
-    };
-};
 
-export const fetchPosts = () => {
-    return (dispatch) => {
-        return Axios.get(apiUrl`/${posts}`, {
-            headers: {
-                'Authorization': 'abimbola120@yahoo.com' 
-            }
-        })
-            .then(response => {
-                dispatch(fetchPostSuccess(response.data))
-            })
-            .catch(error => {
-                throw (error);
-            });
-    };
-};
+
+// export const deleteSinglePost = (post) => {
+//     return (dispatch) => {
+//         return Axios.delete(apiUrl, post, {
+//             headers: {
+//                 'Authorization': 'abimbola120@yahoo.com'
+//             }
+//         })
+//             .then(response => {
+//                 dispatch(deletePostSucces(response.data))
+//             })
+//             .catch(error => {
+//                 throw (error);
+//             });
+//     };
+// };
+
+// export const updateSinglePost = (post) => {
+//     return (dispatch) => {
+//         return Axios.put(apiUrl, post, {
+//             headers: {
+//                 'Authorization': 'abimbola120@yahoo.com'
+//             }
+//         })
+//             .then(response => {
+//                 dispatch(updateSinglePostSuccess(response.data))
+//             })
+//             .catch(error => {
+//                 throw (error);
+//             });
+//     };
+// };
+
+
+
+
+
+// export const createPost = (post) => {
+//     return (dispatch) => {
+//         return Axios.post(apiUrl, post, {
+//             headers: {
+//                 'Authorization': 'abimbola120@yahoo.com'
+//             }
+//         })
+//             .then(response => {
+//                 dispatch(createPostSuccess(response.data))
+//             })
+//             .catch(error => {
+//                 throw (error);
+//             });
+//     };
+// };
+
+// export const fetchPosts = () => {
+//     return (dispatch) => {
+//         return Axios.get(apiUrl`/${posts}`, {
+//             headers: {
+//                 'Authorization': 'abimbola120@yahoo.com'
+//             }
+//         })
+//             .then(response => {
+//                 dispatch(fetchPostSuccess(response.data))
+//             })
+//             .catch(error => {
+//                 throw (error);
+//             });
+//     };
+// };

@@ -17,6 +17,7 @@ export const categoryReducer = (state = [], action) => {
 
 
     case 'FETCH_CATEGORY_OF_A_POST_SUCCESS':
+      console.log(action)
       return { ...state, postincategory: action.data }
 
 
@@ -85,6 +86,23 @@ export const categoryReducer = (state = [], action) => {
       }
 
       return { ...state, posts }
+
+    case "NEW_POST":
+
+    case "EDIT_POST":
+
+    case "DELETE_POST_SUCCESS":
+      statearray = Object.values(state.posts)
+
+      let a= statearray.filter((p) => p.id != action.id)
+      console.log(a)
+      posts = {}
+      for (let num in a) {
+        posts[a[num].id] = a[num]
+      }
+      console.log(posts)
+      return { ...state, posts }
+
 
 
     default:

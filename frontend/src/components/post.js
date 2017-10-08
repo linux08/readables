@@ -33,7 +33,7 @@ const Posts = (props) => {
                                 {/* )}  className="btn btn-info" className="btn btn-primary" */}
                         </select>
                     </div>
-                   
+
                     <div className="dropdown">
 
                         <select className="btn btn-secondary dropdown-toggle header-space" onClick={(event) => {
@@ -64,13 +64,13 @@ const Posts = (props) => {
                 <h4> Posts </h4>
             </div>
             <br />
-
+            {/* /:category/:post_id" */}
             <div className="container small ">
                 {posts && Object.keys(posts).map((p, index) => (
 
                     <div key={index}>
                         {/* "display-3" */}
-                        <Link to={'/'}>  <h1 className="" >Title: {posts[p].title}</h1> </Link>
+                        <Link to={`${posts[p].category}/${posts[p].id}`}>  <h1 className="" >Title: {posts[p].title}</h1> </Link>
                         <br />
                         <div className="">
                             <p className=""> Body: {posts[p].body}</p>
@@ -86,7 +86,7 @@ const Posts = (props) => {
                         <br />
                         <div className="belowpost">
                             <button>Edit: <i className="fa fa-pencil-square-o" aria-hidden="true"></i> </button>
-                            <button className="delete">Delete: <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
+                            <button className="delete" onClick={(e) => props.deletepost(posts[p].id)}>Delete: <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
                         </div>
                         <br />
                         {/* </div> */}

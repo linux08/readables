@@ -2,8 +2,39 @@ import Axios from 'axios'
 
 const BASE_URL = 'http://localhost:5001/'
 
+
+
+export const fetchDetailsForSinglePost = (id) => {
+    return Axios.get(BASE_URL + 'posts/' + id, {
+        headers: { 'Authorization': 'abimbola120@yahoo.com' }
+    })
+        .then(res => res)
+}
+
+export const deleteSinglePost = (id) => {
+    return Axios.delete(BASE_URL + 'posts/' + id, {
+        headers: { 'Authorization': 'abimbola120@yahoo.com' }
+    })
+        .then(res => res)
+}
+
+export const updateSinglePost = (id, post) => {
+    return Axios.put(BASE_URL + 'posts/' + id, post, {
+        headers: { 'Authorization': 'abimbola120@yahoo.com' }
+    })
+        .then(res => res)
+}
+
+
+export const createPost = (post) => {
+    return Axios.post(BASE_URL + 'posts/', post, {
+        headers: { 'Authorization': 'abimbola120@yahoo.com' }
+    })
+        .then(res => res)
+}
+
 export const vote = (id, option) => {
-    return Axios.post(BASE_URL +'posts/' + id, {
+    return Axios.post(BASE_URL + 'posts/' + id, {
         option: `${option}`
     }, {
             headers: { 'Authorization': 'abimbola120@yahoo.com' }
@@ -24,7 +55,7 @@ export const fetchCategoryOfAPost = () => {
     return Axios.get(BASE_URL + 'posts', {
         headers: { 'Authorization': 'abimbola120@yahoo.com' }
     })
-        .then(res => res.json)
+        .then(res => res)
 }
 
 export const FetchCategory = () => {
@@ -55,12 +86,7 @@ export const updateVoteOnComment = (comment) => {
         .then(res => res)
 }
 
-export const fetchDetailsForSinglePost = (id) => {
-    return Axios.put(BASE_URL + 'posts/' + id + '/comments', id, {
-        headers: { 'Authorization': 'abimbola120@yahoo.com' }
-    })
-        .then(res => res)
-}
+
 
 export const createComment = (comment) => {
     return Axios.put(BASE_URL + 'comments', comment, {
@@ -76,29 +102,10 @@ export const fetchCommentSinglePost = (id) => {
         .then(res => res)
 }
 
-export const deleteSinglePost = (post) => {
-    return Axios.delete(BASE_URL + 'posts/' + post + '/comments', post, {
-        headers: { 'Authorization': 'abimbola120@yahoo.com' }
-    })
-        .then(res => res)
-}
 
-export const updateSinglePost = (post) => {
-    return Axios.put(BASE_URL + 'posts/' + post + '/comments', post, {
-        headers: { 'Authorization': 'abimbola120@yahoo.com' }
-    })
-        .then(res => res)
-}
 
 export const fetchSinglePosts = () => {
     return Axios.put(BASE_URL + 'posts/', {
-        headers: { 'Authorization': 'abimbola120@yahoo.com' }
-    })
-        .then(res => res)
-}
-
-export const createPost = (post) => {
-    return Axios.post(BASE_URL + 'posts/', post, {
         headers: { 'Authorization': 'abimbola120@yahoo.com' }
     })
         .then(res => res)
