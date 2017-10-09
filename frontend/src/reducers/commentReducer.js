@@ -11,30 +11,28 @@ export const commentReducer = (state = [], action) => {
       }
     case 'INCREASE_VOTE_FOR_SINGLE_COMMENT_SUCCESS':
 
-      let a = state
-      let updatedstate = a[action.parentid].map((d) => {
+      let updatedstate = state[action.parentid].map((d) => {
 
         if (d.id == action.id) {
           d.voteScore = d.voteScore + 1
         }
         return d
       })
-      console.log(updatedstate)
-
-      console.log(state)
+      return { ...state, updatedstate }
 
     case 'DECREASE_VOTE_FOR_SINGLE_COMMENT_SUCCESS':
-      let a = state
-      let updatedstate = a[action.parentid].map((d) => {
+
+      updatedstate = state[action.parentid].map((d) => {
 
         if (d.id == action.id) {
           d.voteScore = d.voteScore - 1
         }
         return d
       })
-      console.log(updatedstate)
+      // console.log(updatedstate)
 
-      console.log(state)
+      // console.log(state)
+      return { ...state, updatedstate }
 
     default:
       return state;
