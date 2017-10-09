@@ -6,8 +6,8 @@ import Header from './header'
 import Comment from './comment'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
-import { commentupvote, commentdownvote, deleteComment} from '../actions/comment.js'
-import { fetchSinglePosts } from '../actions/post.js'
+import { commentupvote, commentdownvote, deleteComment } from '../actions/comment.js'
+import { fetchSinglePosts, DeleteSinglePost } from '../actions/post.js'
 import { fetchComment } from '../actions/comment.js'
 
 
@@ -27,9 +27,24 @@ class SinglePost extends Component {
         window.location.href = 'http://localhost:3000/' + url + '/posts'
 
     }
+
+    deleteit(id) {
+        console.log('trting to delete')
+        this.props.deletepost(id)
+        alert('post deleted')
+        window.location.href = 'http://localhost:3000/'
+
+    }
     render() {
         console.log(this.props)
         const post = this.props.post
+        console.log(post)
+        var b = post && Object.getOwnPropertyNames(post).length;
+
+        if (b === 0) {
+            // alert('post not available')
+            window.location.href = 'http://localhost:3000/'
+        }
         const comment = this.props.comments
 
         return (
@@ -60,7 +75,7 @@ class SinglePost extends Component {
                                 <br />
                                 <div className="belowpost shift-left">
                                     <button>Edit: <i className="fa fa-pencil-square-o" aria-hidden="true"></i> </button>
-                                    <button className="delete" onClick={(e) => this.props.deletepost(post && post.id)}>Delete: <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
+                                    <button className="delete" onClick={(e) => this.deleteit(post && post.id)}>Delete: <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
                                 </div>
                                 <br />
                                 <h3> Comment </h3>
@@ -92,7 +107,8 @@ function mapDispatchToProps(dispatch) {
         loadPost: id => dispatch(fetchSinglePosts(id)),
         commentupvote: (id, option) => dispatch(commentupvote(id, option)),
         commentdownvote: (id, option) => dispatch(commentdownvote(id, option)),
-        fetchcomment: (id) => dispatch(fetchComment(id))
+        fetchcomment: (id) => dispatch(fetchComment(id)),
+        deletepost: (id) => dispatch(DeleteSinglePost(id))
 
     }
 }

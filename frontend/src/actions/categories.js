@@ -3,7 +3,7 @@ import * as API from '../utils/API.js'
 
 
 
-export const deleteSinglePost = (id,data) => {
+export const deleteSinglePost = (id, data) => {
     return {
         type: actionTypes.DELETE_POST_SUCCESS,
         id,
@@ -90,10 +90,7 @@ export const deletePost = (id) => {
     return function (dispatch) {
         return API.deleteSinglePost(id)
             .then((data) => {
-                console.log('deleting post')
-                // console.log(data.data)
-                dispatch(deleteSinglePost(id,data))
-                //  })
+                dispatch(deleteSinglePost(id, data))
             })
             .catch(err => console.log(err))
     }
@@ -105,10 +102,7 @@ export const fetchPostInCategory = () => {
     return function (dispatch) {
         return API.fetchPosts()
             .then((data) => {
-                console.log('getting fetch category of a post')
-                console.log(data.data)
                 dispatch(fetchPost(data.data))
-                //  })
             })
             .catch(err => console.log(err))
     }
@@ -119,7 +113,6 @@ export const downvote = (id, option) => {
     return function (dispatch) {
         return API.vote(id, option)
             .then((res) => {
-                console.log(res)
                 dispatch(downVote(res.data, id))
             }).catch(err => console.log(err))
 

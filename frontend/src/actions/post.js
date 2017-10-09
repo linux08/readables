@@ -46,6 +46,14 @@ export const deletePostSuccess = (post) => {
 };
 
 
+export const deleteSinglePost = (id, data) => {
+    return {
+        type: actionTypes.DELETE_SINGLE_POST_SUCCESS,
+        id,
+        data
+    }
+}
+
 
 export const fetchSinglePosts = (id) => {
 
@@ -57,6 +65,17 @@ export const fetchSinglePosts = (id) => {
             }).catch(err => console.log(err))
     }
 
+}
+
+
+export const DeleteSinglePost = (id) => {
+    return function (dispatch) {
+        return API.deleteSinglePost(id)
+            .then((data) => {
+                dispatch(deleteSinglePost(id, data))
+            })
+            .catch(err => console.log(err))
+    }
 }
 
 

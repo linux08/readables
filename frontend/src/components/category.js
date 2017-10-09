@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './../logo.svg';
 import './../App.css'
 import { connect } from 'react-redux'
+import moment from 'moment'
 import Header from './header'
 import { Link } from 'react-router-dom'
 
@@ -19,7 +20,7 @@ class Category extends Component {
     changeEvent(e, url) {
         e.preventDefault()
         window.location.href = 'http://localhost:3000/' + url + '/posts'
-        //http://localhost:5001/react/posts
+        
     }
     render() {
         console.log(this.props)
@@ -28,8 +29,29 @@ class Category extends Component {
         const category = params[3]
         const posts = this.props.postsincategory.postincategory
 
-        console.log('i am in category')
-        console.log(posts)
+
+        let a = posts && posts.length
+        if (a == 0) {
+            return (
+                <div >
+                    <Header />
+                    <div className="">
+                        <div className="App">
+                            <div className="positon-header">
+                                <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button>
+                                <select className="btn btn-secondary dropdown-toggle header-space">
+                                    <option value="volvo">Sort by Timestamp</option>
+                                    <option value="saab">Sort by Date</option>
+                                </select>
+                            </div>
+                            <hr />
+                            <h4>  no Post in  this <b>{category}</b> </h4>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+            )
+        }
 
         return (
             <div >
@@ -38,9 +60,6 @@ class Category extends Component {
                     <div className="App">
                         <div className="positon-header">
                             <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button>
-                            {/* <div className="dropdown" > */}
-                            <h5 > </h5>
-                            {/* </div> */}
                             <select className="btn btn-secondary dropdown-toggle header-space">
                                 <option value="volvo">Sort by Timestamp</option>
                                 <option value="saab">Sort by Date</option>
@@ -65,7 +84,7 @@ class Category extends Component {
                                         <p className="">Vote:<button> <i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {p.voteScore}  <button> <i className="fa fa-thumbs-up" aria-hidden="true"></i> </button> </p>
 
                                         <p className="author"> Author: {p.author} </p>
-                                        <p className="time"> Time: {p.timestamp}</p>
+                                        <p className="time"> Time: {moment(p.timestamp).format("MM/DD/YYYY")}</p>
                                     </div>
                                 </div>
                                 <br />
