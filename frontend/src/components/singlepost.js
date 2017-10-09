@@ -36,8 +36,6 @@ class SinglePost extends Component {
         console.log(this.props)
         const post = this.props.post
         var b = post && Object.getOwnPropertyNames(post).length;
-        const url = window.location.href
-        const parentid = url.split('/')[4]
 
         if (b === 0) {
             // alert('post not available')
@@ -63,7 +61,7 @@ class SinglePost extends Component {
                                     <p className=""> Body: {post && post.body}</p>
                                     <div className="shift-left">
                                         <p className=""> Category: {post && post.category} </p>
-                                        <p className="">Vote:<button onClick={(e) => this.props.downvote(post && post.id, parentid, "downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {post && post.voteScore}  <button onClick={(e) => this.props.upvote(post && post.id, parentid, "upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
+                                        <p className="">Vote:<button onClick={(e) => this.props.downvote(post && post.id, "downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {post && post.voteScore}  <button onClick={(e) => this.props.upvote(post && post.id, "upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
 
                                         <p className="author"> Author: {post && post.author} </p>
                                         <p className="time" > Time: {moment(post && post.timestamp).format("MM/DD/YYYY")} </p>
@@ -104,7 +102,7 @@ function mapDispatchToProps(dispatch) {
     return {
         loadPost: id => dispatch(fetchSinglePosts(id)),
         commentupvote: (id, parentid, option) => dispatch(commentupvote(id, parentid, option)),
-        commentdownvote: (id, option) => dispatch(commentdownvote(id, option)),
+        commentdownvote: (id, parentid, option) => dispatch(commentdownvote(id, parentid, option)),
         fetchcomment: (id) => dispatch(fetchComment(id)),
         deletepost: (id) => dispatch(DeleteSinglePost(id)),
         upvote: (id, option) => dispatch(upvote(id, option)),

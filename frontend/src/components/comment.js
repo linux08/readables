@@ -25,7 +25,7 @@ const Comment = (props) => {
                     <div className="comment" key={index}>
                         <p className="adjust-margin"> Author:{p.author} </p>
                         <p className="adjust-margin">  Body:{p.body} </p>
-
+                        {/* onClick={(e) => props.commentupvote(p.id,parentid, "upVote")} */}
                         <p className="vote">Vote:<button onClick={(e) => props.commentdownvote(p.id,parentid, "downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {p.voteScore}  <button onClick={(e) => props.commentupvote(p.id,parentid, "upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
                         <p className="adjust-margin"> Time:{moment(p.timestamp).format("MM/DD/YYYY")} </p>
                         <div>
