@@ -3,6 +3,13 @@ import Axios from 'axios'
 const BASE_URL = 'http://localhost:5001/'
 
 
+// http://localhost:5001/comments/894tuq4ut84ut8v4t8wun89g
+export const deleteSingleComment = (id) => {
+    return Axios.delete(BASE_URL + 'comments/' + id, {
+        headers: { 'Authorization': 'abimbola120@yahoo.com' }
+    })
+        .then(res => res)
+}
 
 export const fetchDetailsForSinglePost = (id) => {
     return Axios.get(BASE_URL + 'posts/' + id, {
@@ -74,12 +81,7 @@ export const FetchCategory = () => {
         .then(res => res).catch(err => console.log(err))
 }
 
-export const deleteSingleComment = (comment) => {
-    return Axios.delete(BASE_URL + 'comments/:id', comment, {
-        headers: { 'Authorization': 'abimbola120@yahoo.com' }
-    })
-        .then(res => res)
-}
+
 
 export const updateDetailsOnComment = (comment) => {
     return Axios.put(BASE_URL + 'comments/:id', comment, {

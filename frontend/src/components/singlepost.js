@@ -107,6 +107,7 @@ function mapDispatchToProps(dispatch) {
         deletepost: (id) => dispatch(DeleteSinglePost(id)),
         upvote: (id, option) => dispatch(upvote(id, option)),
         downvote: (id, option) => dispatch(downvote(id, option)),
+        deletecomment: (id,parentid) => dispatch(deleteComment(id,parentid))
 
     }
 }

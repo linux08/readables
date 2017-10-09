@@ -53,13 +53,25 @@ export const createCommentSuccess = (comment) => {
     }
 };
 
-export const deleteCommentSuccess = (comment) => {
+export const deleteCommentSuccess = (id, parentid, comment) => {
     return {
         type: actionTypes.DELETE_COMMENT_SUCCESS,
-        comment
+        id,
+        comment,
+        parentid
     }
 };
 
+
+export const deleteComment = (id, parentid) => {
+    return function (dispatch) {
+        return API.deleteSingleComment(id)
+            .then((data) => {
+                dispatch(deleteCommentSuccess(id, parentid, data))
+            })
+            .catch(err => console.log(err))
+    }
+}
 
 
 export const fetchComment = (id) => {
@@ -67,26 +79,21 @@ export const fetchComment = (id) => {
     return function (dispatch) {
         return API.fetchCommentSinglePost(id)
             .then((res) => {
-                console.log(res.data)
                 dispatch(fetchCommentForSinglePostSuccess(res.data, id))
             }).catch(err => { throw (err) })
     }
 }
 
 export const commentdownvote = (id, parentid, option) => {
-    console.log('trying to commentdownvotw')
     return function (dispatch) {
-        console.log(option)
         return API.commentvote(id, option)
             .then((res) => {
-                console.log(res)
                 dispatch(commentDownVote(res.data, id, parentid))
             }).catch(err => console.log(err))
-
     }
 }
 
-//
+
 export const commentupvote = (id, parentid, option) => {
     return function (dispatch) {
         return API.commentvote(id, option)
@@ -98,18 +105,6 @@ export const commentupvote = (id, parentid, option) => {
     }
 }
 
-export const deleteComment = (id) => {
-    return function (dispatch) {
-        return API.deleteSinglePost(id)
-            .then((data) => {
-                console.log('deleting post')
-                // console.log(data.data)
-                dispatch(deleteCommentSuccess(id, data))
-                //  })
-            })
-            .catch(err => console.log(err))
-    }
-}
 
 
 
