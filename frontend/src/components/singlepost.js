@@ -6,9 +6,9 @@ import Header from './header'
 import Comment from './comment'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
-import { commentupvote, commentdownvote, deleteComment } from '../actions/comment.js'
-import { fetchSinglePosts, DeleteSinglePost } from '../actions/post.js'
-import { fetchComment } from '../actions/comment.js'
+import { fetchComment, commentupvote, commentdownvote, deleteComment } from '../actions/comment.js'
+import { upvote, downvote, fetchSinglePosts, DeleteSinglePost } from '../actions/post.js'
+import { } from '../actions/categories.js'
 
 
 class SinglePost extends Component {
@@ -19,8 +19,6 @@ class SinglePost extends Component {
         const id = params[4]
         this.props.loadPost(id)
         this.props.fetchcomment(id)
-
-
     }
     changeEvent(e, url) {
         e.preventDefault()
@@ -29,7 +27,6 @@ class SinglePost extends Component {
     }
 
     deleteit(id) {
-        console.log('trting to delete')
         this.props.deletepost(id)
         alert('post deleted')
         window.location.href = 'http://localhost:3000/'
@@ -38,8 +35,9 @@ class SinglePost extends Component {
     render() {
         console.log(this.props)
         const post = this.props.post
-        console.log(post)
         var b = post && Object.getOwnPropertyNames(post).length;
+        const url = window.location.href
+        const parentid = url.split('/')[4]
 
         if (b === 0) {
             // alert('post not available')
@@ -65,7 +63,7 @@ class SinglePost extends Component {
                                     <p className=""> Body: {post && post.body}</p>
                                     <div className="shift-left">
                                         <p className=""> Category: {post && post.category} </p>
-                                        <p className="">Vote:<button onClick={(e) => this.props.commentdownvote(post && post.id, "downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {post && post.voteScore}  <button onClick={(e) => this.props.commentupvote(post && post.id, "upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
+                                        <p className="">Vote:<button onClick={(e) => this.props.downvote(post && post.id, parentid, "downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {post && post.voteScore}  <button onClick={(e) => this.props.upvote(post && post.id, parentid, "upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
 
                                         <p className="author"> Author: {post && post.author} </p>
                                         <p className="time" > Time: {moment(post && post.timestamp).format("MM/DD/YYYY")} </p>
@@ -105,10 +103,12 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         loadPost: id => dispatch(fetchSinglePosts(id)),
-        commentupvote: (id, option) => dispatch(commentupvote(id, option)),
+        commentupvote: (id, parentid, option) => dispatch(commentupvote(id, parentid, option)),
         commentdownvote: (id, option) => dispatch(commentdownvote(id, option)),
         fetchcomment: (id) => dispatch(fetchComment(id)),
-        deletepost: (id) => dispatch(DeleteSinglePost(id))
+        deletepost: (id) => dispatch(DeleteSinglePost(id)),
+        upvote: (id, option) => dispatch(upvote(id, option)),
+        downvote: (id, option) => dispatch(downvote(id, option)),
 
     }
 }

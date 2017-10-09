@@ -10,50 +10,32 @@ export const commentReducer = (state = [], action) => {
         ...state, [action.id]: action.comment
       }
     case 'INCREASE_VOTE_FOR_SINGLE_COMMENT_SUCCESS':
-      console.log(action)
-      let newState = state.comments
-      newState = Object.keys(newState).map((p) => {
-        console.log(newState)
-        // if (newState[p].id == action.id) {
 
-        //   newState[p].voteScore = action.post.voteScore
-        //   console.log(newState)
-        //   return newState
-        // }
+      let a = state
+      let updatedstate = a[action.parentid].map((d) => {
+
+        if (d.id == action.id) {
+          d.voteScore = d.voteScore + 1
+        }
+        return d
       })
-      console.log(newState)
-    // return { ...state, newState }
-    case 'DECREASE_VOTE_FOR_SINGLE_COMMENT_SUCCESS':
-      // console.log(action)
+      console.log(updatedstate)
+
       console.log(state)
-      var statearray = Object.values(state)
-      var a = statearray.map((p) => {
-        p.map((c) => {
-          console.log(c.id)
-          console.log(action.id)
-          console.log(action.post.voteScore)
-          if (c.id == action.id) {
 
-            c.voteScore = action.post.voteScore
-            console.log(c.voteScore)
-            return c
-          }
-        })
-        return p
+    case 'DECREASE_VOTE_FOR_SINGLE_COMMENT_SUCCESS':
+      let a = state
+      let updatedstate = a[action.parentid].map((d) => {
+
+        if (d.id == action.id) {
+          d.voteScore = d.voteScore - 1
+        }
+        return d
       })
-      // var statearray = Object.values(state)
-      console.log(a)
-      //newState = Object.keys(newState).map((p) => {
-      // console.log(newState)
-      // if (newState[p].id == action.id) {
+      console.log(updatedstate)
 
-      //   newState[p].voteScore = action.post.voteScore
-      //   console.log(newState)
-      //   return newState
-      // }
-      // })
-      //console.log(newState)
-      console.log(action)
+      console.log(state)
+
     default:
       return state;
   }

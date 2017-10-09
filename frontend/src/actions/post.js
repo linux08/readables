@@ -55,6 +55,44 @@ export const deleteSinglePost = (id, data) => {
 }
 
 
+export const upVote = (post, id) => {
+    return {
+        type: actionTypes.INCREASE_VOTE_POST_SUCCESS,
+        post,
+        id
+    }
+}
+
+export const downVote = (post, id) => {
+    return {
+        type: actionTypes.DECREASE_VOTE_POST_SUCCESS,
+        post,
+        id
+    }
+}
+
+export const downvote = (id, option) => {
+    return function (dispatch) {
+        return API.vote(id, option)
+            .then((res) => {
+                dispatch(downVote(res.data, id))
+            }).catch(err => console.log(err))
+
+    }
+}
+
+//
+export const upvote = (id, option) => {
+    return function (dispatch) {
+        return API.vote(id, option)
+            .then((res) => {
+                console.log(res)
+                dispatch(upVote(res.data, id))
+            }).catch(err => console.log(err))
+
+    }
+}
+
 export const fetchSinglePosts = (id) => {
 
     return function (dispatch) {

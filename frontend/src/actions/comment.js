@@ -3,19 +3,21 @@ import * as API from '../utils/API.js'
 import Axios from 'axios'
 
 
-export const commentUpVote = (post, id) => {
+export const commentUpVote = (post, id,parentid) => {
     return {
         type: actionTypes.INCREASE_VOTE_FOR_SINGLE_COMMENT_SUCCESS,
         post,
-        id
+        id,
+        parentid
     }
 }
 
-export const commentDownVote = (post, id) => {
+export const commentDownVote = (post, id,parentid) => {
     return {
         type: actionTypes.DECREASE_VOTE_FOR_SINGLE_COMMENT_SUCCESS,
         post,
-        id
+        id,
+        parentid
     }
 }
 
@@ -71,24 +73,24 @@ export const fetchComment = (id) => {
     }
 }
 
-export const commentdownvote = (id, option) => {
+export const commentdownvote = (id,parentid, option) => {
     return function (dispatch) {
         return API.commentvote(id, option)
             .then((res) => {
                 console.log(res)
-                dispatch(commentDownVote(res.data, id))
+                dispatch(commentDownVote(res.data, id, parentid))
             }).catch(err => console.log(err))
 
     }
 }
 
 //
-export const commentupvote = (id, option) => {
+export const commentupvote = (id, parentid, option) => {
     return function (dispatch) {
         return API.commentvote(id, option)
             .then((res) => {
                 console.log(res)
-                dispatch(commentUpVote(res.data, id))
+                dispatch(commentUpVote(res.data, id, parentid))
             }).catch(err => console.log(err))
 
     }

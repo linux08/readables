@@ -6,15 +6,26 @@ export const postReducer = (state = {}, action) => {
       return {
         ...state, [action.id]: action.posts
       }
-    // state = [action.id]: action.posts
-    // return state
-    //  return {state,post:action.posts}
-    // case "INCREASE_VOTE_FOR_SINGLE_POST_SUCCESS":
-    //   console.log(action)
-    //   return action
-    // case "DECREASE_VOTE_FOR_SINGLE_POST_SUCCESS":
-    //   console.log(action)
-    //   return action
+
+    case "DELETE_SINGLE_POST_SUCCESS":
+      console.log('post deleted');
+
+    case "INCREASE_VOTE_POST_SUCCESS":
+
+      let post = {}
+      post[action.post.id] = action.post
+      console.log(post)
+      return post
+
+
+
+
+    case "DECREASE_VOTE_POST_SUCCESS":
+      post = {}
+      post[action.post.id] = action.post
+      console.log(post)
+      return post
+
     default:
       return state;
   }

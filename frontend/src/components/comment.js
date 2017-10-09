@@ -5,6 +5,8 @@ import moment from 'moment'
 const Comment = (props) => {
     console.log(props)
     const comment = props.comments
+    const url = window.location.href
+    const parentid = url.split('/')[4]
 
     let a = comment && comment.length || []
 
@@ -24,7 +26,7 @@ const Comment = (props) => {
                         <p className="adjust-margin"> Author:{p.author} </p>
                         <p className="adjust-margin">  Body:{p.body} </p>
 
-                        <p className="vote">Vote:<button onClick={(e) => props.commentdownvote(p.id, "downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {p.voteScore}  <button onClick={(e) => props.commentupvote(p.id, "upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
+                        <p className="vote">Vote:<button onClick={(e) => props.commentdownvote(p.id,parentid, "downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {p.voteScore}  <button onClick={(e) => props.commentupvote(p.id,parentid, "upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
                         <p className="adjust-margin"> Time:{moment(p.timestamp).format("MM/DD/YYYY")} </p>
                         <div>
                             <button className="adjust-margin"> Edit </button>
