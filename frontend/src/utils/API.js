@@ -2,8 +2,15 @@ import Axios from 'axios'
 
 const BASE_URL = 'http://localhost:5001/'
 
+export const createPost = (post) => {
+            return Axios.post(BASE_URL+'posts', post, {
+                headers: {
+                    'Authorization': 'abimbola120@yahoo.com'
+                }
+            }).then(res => res)
+                
+    };
 
-// http://localhost:5001/comments/894tuq4ut84ut8v4t8wun89g
 export const deleteSingleComment = (id) => {
     return Axios.delete(BASE_URL + 'comments/' + id, {
         headers: { 'Authorization': 'abimbola120@yahoo.com' }
@@ -33,12 +40,6 @@ export const updateSinglePost = (id, post) => {
 }
 
 
-export const createPost = (post) => {
-    return Axios.post(BASE_URL + 'posts/', post, {
-        headers: { 'Authorization': 'abimbola120@yahoo.com' }
-    })
-        .then(res => res)
-}
 
 export const commentvote = (id, option) => {
     return Axios.post(BASE_URL + 'comments/' + id, {

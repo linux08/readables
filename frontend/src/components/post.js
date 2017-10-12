@@ -3,31 +3,26 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 
 
+
 const Posts = (props) => {
     console.log(props)
-
-
-
     const response = props.posts
-    //console.log(response)
     const posts = response.posts
     var b = posts && Object.getOwnPropertyNames(posts).length;
-    
+
     if (b === 0) {
         return (
             <div className="">
                 <div className="App">
                     <div className="positon-header">
-                        <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button>
+                        <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true" > ADD </i></button>
                         <div className="dropdown" >
                             <select className="header-space btn btn-secondary dropdown-toggle header-space" onChange={(event) => props.changeEvent(event.target.value)}>
-                                {/* {category && category.categories.map((a, index) => ( */}
                                 <option value=''  >All</option>
                                 <option value='react'>React</option>
                                 <option value='redux'>Redux</option>
                                 <option value='udacity'>Udacity</option>
                                 )
-                                {/* )}  className="btn btn-info" className="btn btn-primary" */}
                             </select>
                         </div>
 
@@ -60,18 +55,14 @@ const Posts = (props) => {
             </div>
 
         )
-        
+
     }
     const comment = props.comment
-
-
-
-
     return (
         <div className="">
             <div className="App">
                 <div className="positon-header">
-                    <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button>
+                    <Link to={'/createpost'}> <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button></Link>
                     <div className="dropdown" >
                         <select className="header-space btn btn-secondary dropdown-toggle header-space" onChange={(event) => props.changeEvent(event.target.value)}>
                             {/* {category && category.categories.map((a, index) => ( */}
@@ -132,6 +123,7 @@ const Posts = (props) => {
                         </div>
                         <br />
                         <div className="belowpost">
+                                
                             <button>Edit: <i className="fa fa-pencil-square-o" aria-hidden="true"></i> </button>
                             <button className="delete" onClick={(e) => props.deletepost(posts[p].id)}>Delete: <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
                         </div>
@@ -143,7 +135,6 @@ const Posts = (props) => {
     )
 }
 export default Posts
-
 
 
 

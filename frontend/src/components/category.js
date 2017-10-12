@@ -20,7 +20,7 @@ class Category extends Component {
     changeEvent(e, url) {
         e.preventDefault()
         window.location.href = 'http://localhost:3000/' + url + '/posts'
-        
+
     }
     render() {
         console.log(this.props)
@@ -38,11 +38,7 @@ class Category extends Component {
                     <div className="">
                         <div className="App">
                             <div className="positon-header">
-                                <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button>
-                                <select className="btn btn-secondary dropdown-toggle header-space">
-                                    <option value="volvo">Sort by Timestamp</option>
-                                    <option value="saab">Sort by Date</option>
-                                </select>
+                            <Link to={'/createpost'}> <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button></Link>
                             </div>
                             <hr />
                             <h4>  no Post in  this <b>{category}</b> </h4>
@@ -59,11 +55,8 @@ class Category extends Component {
                 <div className="">
                     <div className="App">
                         <div className="positon-header">
-                            <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button>
-                            <select className="btn btn-secondary dropdown-toggle header-space">
-                                <option value="volvo">Sort by Timestamp</option>
-                                <option value="saab">Sort by Date</option>
-                            </select>
+                        <Link to={'/createpost'}> <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button></Link>
+                           
                         </div>
                         <hr />
                         <h4> Posts in <b>{category}</b> </h4>
@@ -75,7 +68,7 @@ class Category extends Component {
                         {posts && posts.map((p, index) => (
                             <div key={index}>
                                 {/* "display-3" */}
-                                <Link to={'/'}>  <h1 className="" >Title: {p.title}</h1> </Link>
+                                 <h1 className="" >Title: {p.title}</h1> 
                                 <br />
                                 <div className="">
                                     <p className=""> Body: {p.body}</p>
@@ -89,7 +82,6 @@ class Category extends Component {
                                 </div>
                                 <br />
 
-                                {/* </div> */}
                             </div>))}
                     </div>
                 </div>
@@ -111,15 +103,6 @@ function mapDispatchToProps(dispatch) {
         ///  clickcategory: () => dispatch(fetchCategory())
     }
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//       createBook: book => dispatch(bookActions.createBook(book))
-//     }
-//   };
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category);
 
