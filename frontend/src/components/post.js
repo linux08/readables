@@ -5,7 +5,6 @@ import moment from 'moment'
 
 
 const Posts = (props) => {
-    console.log(props)
     const response = props.posts
     const posts = response.posts
     var b = posts && Object.getOwnPropertyNames(posts).length;
@@ -26,27 +25,8 @@ const Posts = (props) => {
                             </select>
                         </div>
 
-                        <div className="dropdown">
-
-                            <select className="btn btn-secondary dropdown-toggle header-space" onClick={(event) => {
-                                if (event.target.value === "time") {
-                                    props.sortbydate(posts)
-
-                                }
-                                if (event.target.value === "vote") {
-                                    props.sortbyvote(posts)
-
-                                }
-                                else {
-                                    console.log('nothing selected')
-                                }
-                            }}>
-                                <option disabled="" value="">Filter Post</option>
-                                <option value="time" >Sort by Timestamp</option>
-                                <option value="vote">Sort by Vote</option>
-                            </select>
-                        </div>
-
+                        <button type="button" className="  header-space btn btn-success" onClick={(event) => { props.sortbydate(posts) }}>Sort_by_time</button>
+                        <button type="button" className="  header-space btn btn-info" onClick={(event) => { props.sortbyvote(posts) }}>Sort_by_vote</button>
 
                     </div>
                     <hr />
@@ -74,30 +54,8 @@ const Posts = (props) => {
                                 {/* )}  className="btn btn-info" className="btn btn-primary" */}
                         </select>
                     </div>
-                    <button type="button" className="  header-space btn btn-success" onClick={(event) => {props.sortbydate(posts)}}>Sort_by_time</button>
-                    <button type="button" className="  header-space btn btn-info" onClick={(event) => {props.sortbyvote(posts)}}>Sort_by_vote</button>
-
-                    {/* <div className="dropdown">
-
-                        <select className="btn btn-secondary dropdown-toggle header-space" onClick={(event) => {
-                            if (event.target.value === "time") {
-                                props.sortbydate(posts)
-
-                            }
-                            if (event.target.value === "vote") {
-                                props.sortbyvote(posts)
-
-                            }
-                            else {
-                                console.log('nothing selected')
-                            }
-                        }}>
-                            <option disabled="" value="">Filter Post</option>
-                            <option value="time" >Sort by Timestamp</option>
-                            <option value="vote">Sort by Vote</option>
-                        </select>
-                    </div> */}
-
+                    <button type="button" className="  header-space btn btn-success" onClick={(event) => { props.sortbydate(posts) }}>Sort_by_time</button>
+                    <button type="button" className="  header-space btn btn-info" onClick={(event) => { props.sortbyvote(posts) }}>Sort_by_vote</button>
 
 
                 </div>
@@ -105,7 +63,6 @@ const Posts = (props) => {
                 <h4> Posts </h4>
             </div>
             <br />
-            {/* /:category/:post_id" */}
             <div className="container small ">
                 {posts && Object.keys(posts).map((p, index) => (
 
@@ -126,8 +83,8 @@ const Posts = (props) => {
                         </div>
                         <br />
                         <div className="belowpost">
-                                
-                        <Link to={`/edit/${posts[p].id}`}> <button>Edit: <i className="fa fa-pencil-square-o" aria-hidden="true"></i> </button></Link>
+
+                            <Link to={`/edit/${posts[p].id}`}> <button>Edit: <i className="fa fa-pencil-square-o" aria-hidden="true"></i> </button></Link>
                             <button className="delete" onClick={(e) => props.deletepost(posts[p].id)}>Delete: <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
                         </div>
                         <br />
