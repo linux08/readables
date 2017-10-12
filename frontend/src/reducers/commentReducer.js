@@ -8,6 +8,18 @@ export const commentReducer = (state = [], action) => {
         ...state, [action.id]: action.comment
       }
 
+    case 'CREATE_COMMENT_SUCCESS':
+    console.log(action)
+      let newcomment = action.comment
+      let newstate = state[action.parentid].push(newcomment)
+      //console.log(state)
+      console.log(newstate)
+
+
+      return state
+    //return { ...state, [action.parentid]: updatedstate }
+
+
     case 'INCREASE_VOTE_FOR_SINGLE_COMMENT_SUCCESS':
       let d = state[action.parentid]
       let updatedstate = d.map((d) => {

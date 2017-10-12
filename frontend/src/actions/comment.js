@@ -3,6 +3,15 @@ import * as API from '../utils/API.js'
 import Axios from 'axios'
 
 
+export const addComment = (comment,parentid) =>{
+    return {
+        type: actionTypes.CREATE_COMMENT_SUCCESS,
+        comment,
+        parentid
+    }
+}
+
+
 export const commentUpVote = (post, id, parentid) => {
     return {
         type: actionTypes.INCREASE_VOTE_FOR_SINGLE_COMMENT_SUCCESS,
@@ -61,6 +70,17 @@ export const deleteCommentSuccess = (id, parentid, comment) => {
         parentid
     }
 };
+
+export const addcomment = (data,parentid) => {
+    console.log('trying to add coment')
+    return function (dispatch) {
+        return API.createComment(data)
+            .then((data) => {
+                dispatch(addComment(data.data,parentid))
+            })
+            .catch(err => console.log(err))
+    }
+}
 
 
 export const deleteComment = (id, parentid) => {

@@ -7,7 +7,7 @@ import Comment from './comment'
 import moment from 'moment'
 import uuid from 'uuid'
 import { Link } from 'react-router-dom'
-import { fetchComment, commentupvote, commentdownvote, deleteComment } from '../actions/comment.js'
+import { fetchComment, commentupvote, commentdownvote, deleteComment, addcomment} from '../actions/comment.js'
 import { upvote, downvote, fetchSinglePosts, DeleteSinglePost } from '../actions/post.js'
 import { } from '../actions/categories.js'
 
@@ -23,15 +23,15 @@ class SinglePost extends Component {
     }
 
     handlePostSubmit(val) {
-        console.log(val)
-        console.log('hehe')
-        // val.parentId = parentid
-        // val.id = uuid() val, parentid
-        // val.timestamp = Date.now()
-        // console.log(val)
-        // API.createPost(val).then((res) => console.log(res))
-        // alert('post entered succesfully')
-        // window.location.href = "/"
+        const url = window.location.href
+        const parentid = url.split('/')[4]
+        
+         val.parentId = parentid
+         val.id = uuid() 
+         val.timestamp = Date.now()
+         console.log(this.props)
+         this.props.addcomment(val,parentid)
+
     }
 
     changeEvent(e, url) {
@@ -128,7 +128,8 @@ function mapDispatchToProps(dispatch) {
         deletepost: (id) => dispatch(DeleteSinglePost(id)),
         upvote: (id, option) => dispatch(upvote(id, option)),
         downvote: (id, option) => dispatch(downvote(id, option)),
-        deletecomment: (id, parentid) => dispatch(deleteComment(id, parentid))
+        deletecomment: (id, parentid) => dispatch(deleteComment(id, parentid)),
+        addcomment: (data,parentid) => dispatch(addcomment(data, parentid))
 
     }
 }

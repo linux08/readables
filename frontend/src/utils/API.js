@@ -9,7 +9,19 @@ export const createPost = (post) => {
                 }
             }).then(res => res)
                 
-    };
+};
+
+
+export const createComment = (comment) => {
+    return Axios.post(BASE_URL + 'comments', comment, {
+        headers: { 'Authorization': 'abimbola120@yahoo.com' }
+    })
+        .then(res => res)
+}
+
+
+
+
 
 export const deleteSingleComment = (id) => {
     return Axios.delete(BASE_URL + 'comments/' + id, {
@@ -100,12 +112,6 @@ export const updateVoteOnComment = (comment) => {
 
 
 
-export const createComment = (comment) => {
-    return Axios.put(BASE_URL + 'comments', comment, {
-        headers: { 'Authorization': 'abimbola120@yahoo.com' }
-    })
-        .then(res => res)
-}
 
 export const fetchCommentSinglePost = (id) => {
     return Axios.get(BASE_URL + 'posts/' + id + '/comments', {

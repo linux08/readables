@@ -71,6 +71,17 @@ export const downVote = (post, id) => {
     }
 }
 
+export const fetchSinglePosts = (id) => {
+    console.log('i got her')
+        return function (dispatch) {
+            return API.fetchDetailsForSinglePost(id)
+                .then((res) => {
+                    console.log(res)
+                    dispatch(fetchSinglePostSuccess(res.data, id))
+                }).catch(err => console.log(err))
+        }
+}
+
 export const downvote = (id, option) => {
     return function (dispatch) {
         return API.vote(id, option)
@@ -93,17 +104,7 @@ export const upvote = (id, option) => {
     }
 }
 
-export const fetchSinglePosts = (id) => {
 
-    return function (dispatch) {
-        return API.fetchDetailsForSinglePost(id)
-            .then((res) => {
-                console.log(res)
-                dispatch(fetchSinglePostSuccess(res.data, id))
-            }).catch(err => console.log(err))
-    }
-
-}
 
 
 export const DeleteSinglePost = (id) => {

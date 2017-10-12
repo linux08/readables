@@ -1,98 +1,127 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import { fetchSinglePosts } from '../../actions/post.js'
+import { fetchSinglePosts } from './../../actions/post.js'
+import * as API from '../../utils/API.js'
+import Header from '../header'
+import Footer from '../footer'
 
 
 
-const url = window.location.href
-const id = url.split('/')[4]
 
-//const data = loadpost(id)
+class EditPostForm extends Component{
 
-//console.log(data)
+    
+    constructor(props){
+        super(props)
+        this.state= {
+            body: '',
+            title:''
+        }
+    }
 
+    getPostData() {
+        const { post_id } = this.props.match.params
+        API.fetchDetailsForSinglePost(post_id).then((res)  =>{
+    
+            this.setState({
+                body:res.data.body,
+                Title:res.data.title
+            })
+        }).then( () =>{
+            this.props.initialize({title:this.state.title , body: this.state.body})  
+        })
+		
+	
+	}
 
+    componentDidMount(){
+        this.getPostData()
+        const { post_id } = this.props.match.params
+        this.props.fetchSinglePosts(post_id)
+   
+    }
+   
+    submitPost(val) {
 
-// const data = {
-//     this.props.loadPost(id)   
+         const { post_id } = this.props.match.params
+    
+         API.updateSinglePost(post_id,val).then((res) => console.log(res))
+         alert('Post edited succesfully')
+         window.location.href= "/"
+      
+      }
+    render(){
+        
+        const { handleSubmit, load, pristine, reset, submitting,post } = this.props
+        
+        var b = post && Object.getOwnPropertyNames(post).length;
+        if (!post) {
+            return <div>NO POST</div>
+        }
 
-// }
+        if (b === 0) {
+            // alert('post not available')
+            window.location.href = 'http://localhost:3000/'
+        }
+        if (this.props && !post) {
+            alert('no post')
+        }
 
-let InitializeFromStateForm = props => {
-    const { handleSubmit, load, pristine, reset, submitting } = props
-    return (
-        <form onSubmit={handleSubmit}>
-
-            <div>
-                <label>Author</label>
+        return(
+    <div>
+        <Header />
+        
+            <form name="editForm"  className="edit-form" onSubmit={handleSubmit(this.submitPost.bind(this))}>
+                    
                 <div>
-                    <Field
-                        name="firstName"
-                        component="input"
-                        type="text"
-                        placeholder="First Name"
-                    />
+                    <label>Title</label>
+                    <div>
+                        <Field
+                            name="title"
+                            component="input"
+                            type="text"
+                            placeholder="Title"
+                        />
+                    </div>
                 </div>
-            </div>
-            <div>
-                <label>Body</label>
                 <div>
-                    <Field
-                        name="lastName"
-                        component="input"
-                        type="text"
-                        placeholder="Last Name"
-                    />
+                    <label>Body</label>
+                    <div>
+                        <Field
+                            name="body"
+                            component="input"
+                            type="text"
+                            placeholder="Body"
+                        />
+                    </div>
                 </div>
-            </div>
 
-
-
-
-            <div>
-                <button type="submit" disabled={pristine || submitting}>
-                    Submit
-        </button>
-                <button type="button" disabled={pristine || submitting} onClick={reset}>
-                    Undo Changes
-        </button>
-            </div>
-        </form>
-    )
+                <div>
+                    <button type="submit" >
+                        Submit
+                    </button>
+                    <button type="button" onClick={reset}>
+                        Undo Changes
+                    </button>
+                </div>
+           </form>
+           <Footer />
+        </div>
+        )
+    }
 }
 
-// Decorate with reduxForm(). It will read the initialValues prop provided by connect()
-InitializeFromStateForm = reduxForm({
-    form: 'initializeFromState' // a unique identifier for this form
-})(InitializeFromStateForm)
-
-// You have to connect() to any reducers that you wish to connect to yourself
-InitializeFromStateForm = connect(
-    state => ({
-        initialValues: state.post[id]// pull initial values from account reducer
-    })//,mapStateToProps,mapDispatchToProps
-
-  //  state.post[id]
-   
-)(InitializeFromStateForm)
-
-
-
-// function mapStateToProps(state, ownProps) {
+function mapStateToProps(state,ownProps) {
     
-//         return {
+        return {
     
-//             post: state.post[id]
-//         }
-//     }
+            post: state.post[ownProps.match.params.post_id]
+        }
+}
     
     
-//     function mapDispatchToProps(dispatch) {
-//         return {
-//             loadPost: id => dispatch(fetchSinglePosts(id))
     
-//         }
-//     }
-
-export default InitializeFromStateForm
+export default  reduxForm({
+        form: 'initializeFromState' // a unique identifier for this form
+    })(connect(mapStateToProps,{ fetchSinglePosts  })(EditPostForm));

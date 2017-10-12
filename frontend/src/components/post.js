@@ -124,7 +124,7 @@ const Posts = (props) => {
                         <br />
                         <div className="belowpost">
                                 
-                            <button>Edit: <i className="fa fa-pencil-square-o" aria-hidden="true"></i> </button>
+                        <Link to={`/edit/${posts[p].id}`}> <button>Edit: <i className="fa fa-pencil-square-o" aria-hidden="true"></i> </button></Link>
                             <button className="delete" onClick={(e) => props.deletepost(posts[p].id)}>Delete: <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
                         </div>
                         <br />
