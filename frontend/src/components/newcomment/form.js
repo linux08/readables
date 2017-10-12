@@ -2,15 +2,15 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 
-class CommentForm extends Component{ 
+// class CommentForm extends Component{ 
 
-render(){
-    
-}
+// render(){
 
-}
+// }
 
-export default CommentForm
+// }
+
+// export default CommentForm
 
 const required = value => value ? undefined : 'Required'
 const minValue = min => value =>
