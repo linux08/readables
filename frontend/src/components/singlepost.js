@@ -17,7 +17,7 @@ class SinglePost extends Component {
     componentDidMount() {
         const url = window.location.href
         const params = url.split('/')
-        const id = params[4]//.replace(/\?/g,'')
+        const id = params[4]
         this.props.loadPost(id)
         this.props.fetchcomment(id)
     }
@@ -74,15 +74,14 @@ class SinglePost extends Component {
                             <h5> POST </h5>
                             <br />
                             <br />
-                            {/* "display-3" */}
                             <div className="border-post">
                               <h1 className="" >Title: {post && post.title}</h1> 
                                 <br />
                                 <div className="shift-lt">
-                                    <p className=""> Body: {post && post.body}</p>
+                                    <p className="body"> Body: {post && post.body}</p>
                                     <div className="shift-lt">
-                                        <p className=""> Category: {post && post.category} </p>
-                                        <p className="">Vote:<button onClick={(e) => this.props.downvote(post && post.id, "downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {post && post.voteScore}  <button onClick={(e) => this.props.upvote(post && post.id, "upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
+                                        <p className="category"> Category: {post && post.category} </p>
+                                        <p className="vote">Vote:<button onClick={(e) => this.props.downvote(post && post.id, "downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {post && post.voteScore}  <button onClick={(e) => this.props.upvote(post && post.id, "upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
 
                                         <p className="author"> Author: {post && post.author} </p>
                                         <p className="time" > Time: {moment(post && post.timestamp).format("MM/DD/YYYY")} </p>
@@ -91,7 +90,7 @@ class SinglePost extends Component {
                                 </div>
                                 <br />
                                 <div className="belowpost ">
-                                    <button>Edit: <i className="fa fa-pencil-square-o" aria-hidden="true"></i> </button>
+                                <Link to={`/edit/${ post && post.id}`}> <button>Edit: <i className="fa fa-pencil-square-o" aria-hidden="true"></i> </button></Link>
                                     <button className="delete" onClick={(e) => this.deleteit(post && post.id)}>Delete: <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
                                 </div>
                                 <br />

@@ -2,13 +2,33 @@ import Axios from 'axios'
 
 const BASE_URL = 'http://localhost:5001/'
 
+
+
+export const fetchSingleComment= (id) => {
+    return Axios.get(BASE_URL +'comments/' + id , {
+        headers: { 'Authorization': 'abimbola120@yahoo.com' }
+    })
+        .then(res => res)
+}
+
+
+export const editComment = (id, comment) => {
+    console.log(id)
+    console.log(comment)
+    return Axios.put(BASE_URL + 'comments/' + id, comment, {
+        headers: { 'Authorization': 'abimbola120@yahoo.com' }
+    })
+        .then(res => res)
+}
+
+
 export const createPost = (post) => {
-            return Axios.post(BASE_URL+'posts', post, {
-                headers: {
-                    'Authorization': 'abimbola120@yahoo.com'
-                }
-            }).then(res => res)
-                
+    return Axios.post(BASE_URL + 'posts', post, {
+        headers: {
+            'Authorization': 'abimbola120@yahoo.com'
+        }
+    }).then(res => res)
+
 };
 
 
@@ -18,8 +38,6 @@ export const createComment = (comment) => {
     })
         .then(res => res)
 }
-
-
 
 
 

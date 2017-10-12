@@ -3,7 +3,15 @@ import * as API from '../utils/API.js'
 import Axios from 'axios'
 
 
-export const addComment = (comment,parentid) =>{
+export const editComment = (comment, parentid) => {
+    return {
+        type: actionTypes.EDIT_COMMENT_SUCCESS,
+        comment,
+        parentid
+    }
+}
+
+export const addComment = (comment, parentid) => {
     return {
         type: actionTypes.CREATE_COMMENT_SUCCESS,
         comment,
@@ -71,16 +79,29 @@ export const deleteCommentSuccess = (id, parentid, comment) => {
     }
 };
 
-export const addcomment = (data,parentid) => {
+export const editcomment = (data, parentid) => {
     console.log('trying to add coment')
     return function (dispatch) {
         return API.createComment(data)
             .then((data) => {
-                dispatch(addComment(data.data,parentid))
+                dispatch(addComment(data.data, parentid))
             })
             .catch(err => console.log(err))
     }
 }
+
+
+
+export const addcomment = (data, parentid) => {
+    return function (dispatch) {
+        return API.createComment(data)
+            .then((data) => {
+                dispatch(addComment(data.data, parentid))
+            })
+            .catch(err => console.log(err))
+    }
+}
+
 
 
 export const deleteComment = (id, parentid) => {
@@ -118,7 +139,6 @@ export const commentupvote = (id, parentid, option) => {
     return function (dispatch) {
         return API.commentvote(id, option)
             .then((res) => {
-                console.log(res)
                 dispatch(commentUpVote(res.data, id, parentid))
             }).catch(err => console.log(err))
 
@@ -126,118 +146,3 @@ export const commentupvote = (id, parentid, option) => {
 }
 
 
-
-
-
-
-
-// export const deleteSingleComment = (comment) => {
-//     const url = apiUrl`/${'/comments/:id'}`
-//     return async (dispatch) => {
-//         try {
-//             const response = await Axios.delete(url, comment,
-//                 {
-//                     headers: { 'Authorization': 'abimbola120@yahoo.com' }
-//                 })
-//             return dispatch(fetchCommentForSinglePostSuccess(response.data))
-//         }
-//         catch (err) {
-//             console.log(err)
-//         }
-//     };
-// };
-
-
-
-// export const updateDetailsOnComment = (comment) => {
-//     const url = apiUrl`/${'/comments/:id'}`
-//     return async (dispatch) => {
-//         try {
-//             const response = await Axios.put(url, comment,
-//                 {
-//                     headers: { 'Authorization': 'abimbola120@yahoo.com' }
-//                 })
-//             return dispatch(updateDetailsForSinglePostSuccess(response.data))
-//         }
-//         catch (err) {
-//             console.log(err)
-//         }
-
-//     };
-// };
-
-// export const updateVoteOnComment = (comment) => {
-//     const url = apiUrl
-//     //`/${'/comments/:id'}`
-//     return async (dispatch) => {
-//         try {
-//             const response = await Axios.put(url, comment,
-//                 {
-//                     headers: { 'Authorization': 'abimbola120@yahoo.com' }
-//                 })
-//             return dispatch(updateVoteForSinglePostSuccess(response.data))
-//         }
-//         catch (err) {
-//             console.log(err)
-//         }
-//     };
-// }
-
-// export const fetchDetailsForSinglePost = (id) => {
-//     console.log('hehhe')
-//     console.log(id)
-//     const url = 'http://localhost:5001/posts/'+id+'/comments'
-//     console.log(url)
-//     return async (dispatch) => {
-//         try {
-//             const response = await Axios.get(url,
-//                 {
-//                     headers: { 'Authorization': 'abimbola120@yahoo.com' }
-//                 })
-//                 console.log(response)
-//             return dispatch(fetchDetailsForSinglePostSuccess(response.data))
-//         }
-//         catch (err) {
-//             console.log(err)
-//         }
-//     }
-
-// };
-
-
-// export const createComment = (comment) => {
-//     return (dispatch) => {
-//         return Axios.post(apiUrl`/${'comments'}`, comment, {
-//             headers: {
-//                 'Authorization': 'abimbola120@yahoo.com' 
-//             }
-//         })
-//             .then(response => {
-//                 dispatch(createCommentSuccess(response.data))
-//             })
-//             .catch(error => {
-//                 throw (error);
-//             });
-//     };
-// };
-
-// export const fetchCommentSinglePost = (id) => {
-
-//     //    http://localhost:5001/posts/8xf0y6ziyjabvozdd253nd/comments
-
-//     const url = 'http://localhost:5001/posts/' + id + '/comments'
-//     // apiUrl`/${'/comments/:id'}`
-//     return async (dispatch) => {
-//         try {
-//             const response = await Axios.put(url,
-//                 {
-//                     headers: { 'Authorization': 'abimbola120@yahoo.com' }
-//                 })
-//             return dispatch(updateDetailsForSinglePostSuccess(response.data))
-//         }
-//         catch (err) {
-//             console.log(err)
-//         }
-//     }
-
-// };

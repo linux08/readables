@@ -26,7 +26,7 @@ class EditPostForm extends Component{
     
             this.setState({
                 body:res.data.body,
-                Title:res.data.title
+                title:res.data.title
             })
         }).then( () =>{
             this.props.initialize({title:this.state.title , body: this.state.body})  

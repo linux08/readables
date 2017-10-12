@@ -74,8 +74,10 @@ const Posts = (props) => {
                                 {/* )}  className="btn btn-info" className="btn btn-primary" */}
                         </select>
                     </div>
+                    <button type="button" className="  header-space btn btn-success" onClick={(event) => {props.sortbydate(posts)}}>Sort_by_time</button>
+                    <button type="button" className="  header-space btn btn-info" onClick={(event) => {props.sortbyvote(posts)}}>Sort_by_vote</button>
 
-                    <div className="dropdown">
+                    {/* <div className="dropdown">
 
                         <select className="btn btn-secondary dropdown-toggle header-space" onClick={(event) => {
                             if (event.target.value === "time") {
@@ -94,7 +96,8 @@ const Posts = (props) => {
                             <option value="time" >Sort by Timestamp</option>
                             <option value="vote">Sort by Vote</option>
                         </select>
-                    </div>
+                    </div> */}
+
 
 
                 </div>

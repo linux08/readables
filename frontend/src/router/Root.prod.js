@@ -8,18 +8,20 @@ import Category from '../components/category'
 import SinglePost from '../components/singlepost'
 import Addpost from '../components/newpost/postform'
 import  EditPost from '../components/newpost/editpostform'
+import  EditComment from '../components/newcomment/editcommentform'
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <div>
       <Switch >
       <Route exact path="/" component={App} />
-      <Route   exact path="/createpost" component={Addpost} />
-      <Route   exact path="/:category" component={Category} />
-      <Route exact path="/:category/:post_id" component={SinglePost} />
-      <Route exact path="/edit/:post_id" component={EditPost} />
-    
-      {/* <Route exact path ='/edit' component={App} /> */}
+      <Route    path="/createpost" component={Addpost} />
+      <Route  path="/edit/:post_id" component={EditPost} />
+      <Route  path="/comment/:comment_id" component={EditComment} />
+      <Route  exact path="/:category" component={Category} />
+      <Route  path="/:category/:post_id" component={SinglePost} />
+      
+  
     </Switch>
     </div>
   </Provider>
