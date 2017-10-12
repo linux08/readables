@@ -11,19 +11,6 @@ export const deleteSinglePost = (id, data) => {
     }
 }
 
-// export const createPost =(id) =>{
-//     return {
-//         type: actionTypes.DELETE_POST_SUCCESS,
-//         id
-//     }
-// }
-
-// export const updatePost =(id) =>{
-//     return {
-//         type: actionTypes.DELETE_POST_SUCCESS,
-//         id
-//     }
-// }
 
 
 export const sortByVote = (data) => {
@@ -160,3 +147,16 @@ export const fetchCategoryOfPost = (category) => {
 }
 
 
+// export const createPost =(id) =>{
+//     return {
+//         type: actionTypes.DELETE_POST_SUCCESS,
+//         id
+//     }
+// }
+
+// export const updatePost =(id) =>{
+//     return {
+//         type: actionTypes.DELETE_POST_SUCCESS,
+//         id
+//     }
+// }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import { fetchSinglePosts  } from './../../actions/post.js'
+import { fetchSinglePosts } from './../../actions/post.js'
 import { fetchComment } from './../../actions/comment.js'
 import * as API from '../../utils/API.js'
 import Header from '../header'
@@ -17,7 +17,7 @@ class EditCommentForm extends Component {
         super(props)
         this.state = {
             body: '',
-            error:'',
+            error: '',
             parentid: ''
 
         }
@@ -34,7 +34,7 @@ class EditCommentForm extends Component {
             })
         }).then(() => {
             this.props.initialize({ body: this.state.body })
-        }).catch((err)=> {
+        }).catch((err) => {
             console.log(err)
             this.setState({
                 error: err,
@@ -50,21 +50,17 @@ class EditCommentForm extends Component {
     }
 
     submitComment(val) {
-
         const { comment_id } = this.props.match.params
-        val.timestamp= Date.now()
-    
-        API.editComment(comment_id,val).then((res) => console.log(res))
-        window.location.href ='/category/' +this.state.parentid
-        //"/:category/:post_id"
+        val.timestamp = Date.now()
+        API.editComment(comment_id, val).then((res) => console.log(res))
+        window.location.href = '/category/' + this.state.parentid
         
-
     }
     render() {
 
         const { handleSubmit, load, pristine, reset, submitting, comment } = this.props
 
-        if (this.state.error ) {
+        if (this.state.error) {
             return <div>NO COMMENT</div>
         }
 
@@ -72,9 +68,9 @@ class EditCommentForm extends Component {
         return (
             <div>
                 <Header />
-                
+
                 <form name="editForm" className="edit-form" onSubmit={handleSubmit(this.submitComment.bind(this))}>
-                <h2 className="edit-comment"> EDIT COMMENT </h2>
+                    <h2 className="edit-comment"> EDIT COMMENT </h2>
 
                     <div>
                         <label>Body</label>
