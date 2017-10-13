@@ -77,7 +77,7 @@ const Posts = (props) => {
                                 <p className="">Vote:<button onClick={(e) => props.downvote(posts[p].id, "downVote")}><i className="fa fa-thumbs-down" aria-hidden="true"></i> </button> {posts[p].voteScore}  <button onClick={(e) => props.upvote(posts[p].id, "upVote")}> <i className="fa fa-thumbs-up" aria-hidden="true"></i></button> </p>
 
                                 <p className="author"> Author: {posts[p].author} </p>
-                                <p className="time" > Time: {moment(posts[p].timestamp).format("MM/DD/YYYY")} </p>
+                                <p className="" > Time: {moment(posts[p].timestamp).format("MM/DD/YYYY")} </p>
                                 <p className=""> Comments:{(comment[posts[p].id] || []).length}  <i className="fa fa-comment" aria-hidden="true"></i></p>
                             </div>
                         </div>
