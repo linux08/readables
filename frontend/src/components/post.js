@@ -78,7 +78,7 @@ const Posts = (props) => {
 
                                 <p className="author"> Author: {posts[p].author} </p>
                                 <p className="time" > Time: {moment(posts[p].timestamp).format("MM/DD/YYYY")} </p>
-                                <p className="time"> Comments:{(comment[posts[p].id] || []).length}  <i className="fa fa-comment" aria-hidden="true"></i></p>
+                                <p className=""> Comments:{(comment[posts[p].id] || []).length}  <i className="fa fa-comment" aria-hidden="true"></i></p>
                             </div>
                         </div>
                         <br />
