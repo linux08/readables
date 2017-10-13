@@ -22,6 +22,8 @@ class App extends Component {
     this.props.fetchcategory()
   }
 
+
+
   changeEvent(url) {
     window.location.href = 'http://localhost:3000/' + url
   }
@@ -35,14 +37,14 @@ class App extends Component {
   }
 
   sortVote(data) {
-   
+
     this.props.fetchcategory()
   }
- 
+
   sortTime(data) {
- 
+
     this.props.fetchcategory()
-   
+
   }
 
 
