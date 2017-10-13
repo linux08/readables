@@ -38,7 +38,7 @@ class Category extends Component {
                     <div className="">
                         <div className="App">
                             <div className="positon-header">
-                            <Link to={'/createpost'}> <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button></Link>
+                                <Link to={'/createpost'}> <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button></Link>
                             </div>
                             <hr />
                             <h4>  no Post in  this <b>{category}</b> </h4>
@@ -55,8 +55,8 @@ class Category extends Component {
                 <div className="">
                     <div className="App">
                         <div className="positon-header">
-                        <Link to={'/createpost'}> <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button></Link>
-                           
+                            <Link to={'/createpost'}> <button type="button" className="btn btn-primary"><i className="fa fa-plus" aria-hidden="true"> ADD </i></button></Link>
+
                         </div>
                         <hr />
                         <h4> Posts in <b>{category}</b> </h4>
@@ -68,7 +68,7 @@ class Category extends Component {
                         {posts && posts.map((p, index) => (
                             <div key={index}>
                                 {/* "display-3" */}
-                                 <h1 className="" >Title: {p.title}</h1> 
+                                <h1 className="" >Title: {p.title}</h1>
                                 <br />
                                 <div className="">
                                     <p className=""> Body: {p.body}</p>

@@ -4,8 +4,8 @@ const BASE_URL = 'http://localhost:5001/'
 
 
 
-export const fetchSingleComment= (id) => {
-    return Axios.get(BASE_URL +'comments/' + id , {
+export const fetchSingleComment = (id) => {
+    return Axios.get(BASE_URL + 'comments/' + id, {
         headers: { 'Authorization': 'abimbola120@yahoo.com' }
     })
         .then(res => res)

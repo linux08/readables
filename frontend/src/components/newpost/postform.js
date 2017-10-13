@@ -21,13 +21,7 @@ class PostForm extends Component {
     alert('post entered succesfully')
     window.location.href = "/"
   }
-  reset() {
-
-  }
-  pristine() {
-
-  }
-
+ 
 
   render() {
 
